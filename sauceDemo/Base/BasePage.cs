@@ -12,7 +12,6 @@ namespace sauceDemo
         private string burgerMenuId = "#react-burger-menu-btn";
         private string logoutMenuItem = "#logout_sidebar_link";
         private string shoppingCartBadge = "span.shopping_cart_badge";
-        private string shoppingCart = "shopping_cart_container";
 
         public BasePage(IPage page)
         {
