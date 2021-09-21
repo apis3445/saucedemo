@@ -23,10 +23,12 @@
     <None Remove="Microsoft.Playwright.MSTest" />
     <None Remove="Base\" />
     <None Remove="Tests\" />
+    <None Remove="Components\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Base\" />
     <Folder Include="Tests\" />
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>

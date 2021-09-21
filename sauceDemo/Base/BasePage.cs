@@ -11,6 +11,8 @@ namespace sauceDemo
         protected IPage Page;
         private string burgerMenuId = "#react-burger-menu-btn";
         private string logoutMenuItem = "#logout_sidebar_link";
+        private string shoppingCartBadge = "span.shopping_cart_badge";
+        private string shoppingCart = "shopping_cart_container";
 
         public BasePage(IPage page)
         {
@@ -23,6 +25,20 @@ namespace sauceDemo
         {
             await ClickMenu();
             await Page.ClickAsync(logoutMenuItem);
+        }
+
+        public IElementHandle shopingCartIcon => Page.QuerySelectorAsync(shoppingCartBadge).Result;
+
+        public int ItemsInShoppingCart
+        {
+            get
+            {
+               var element = Page.QuerySelectorAsync(shoppingCartBadge).Result;
+               if (element!=null)
+                    return int.Parse(element.TextContentAsync().Result);
+               else
+                    return 0;
+            }
         }
     }
 }
