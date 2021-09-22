@@ -35,19 +35,19 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: CmdLine@2
-  displayName: "Install .NET Global"
+  displayName: "Install Microsoft.Playwright.CLI"
   inputs:
     script: 'dotnet tool install --global Microsoft.Playwright.CLI'
+
+- task: CmdLine@2
+  displayName: "Install Playwright"
+  inputs:
+    script: 'Playwright Install'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-- task: DotNetCoreCLI@2
-  displayName: Run Playwright Install
-  inputs:
-    command: custom
-    custom: 'tool '
-    arguments: run playwright install
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
