@@ -15,6 +15,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -32,12 +33,12 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- task: DotNetCoreCLI@2
-  displayName: Install Playwright CLI
+
+- task: CmdLine@2
+  displayName: "Install .NET Global"
   inputs:
-    command: custom
-    custom: 'tool '
-    arguments: install Microsoft.Playwright.CLI
+    script: 'dotnet tool install Microsoft.Playwright.CLI'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
