@@ -1,0 +1,10 @@
+﻿{
+    "EnvironmentsSample": {
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BROWSER_TYPE": "Chromium",
+        "BASE_ADDRESS": "https://www.saucedemo.com/"
+
+      }
+    }
+}

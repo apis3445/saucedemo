@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,10 +20,13 @@ namespace sauceDemo.Tests
         [TestInitialize]
         public async Task Setup()
         {
-            page = Initialize.Page;
+            PlaywrightDriver playwrightDriver = new PlaywrightDriver();
+            page = await playwrightDriver.InitalizePlaywright();
             loginPage = new LoginPage(page);
             await loginPage.Goto();
+            await page.Context.ClearCookiesAsync();
             await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
+            
             inventoryPage = new InventoryPage(page);
         }
 
@@ -90,6 +94,7 @@ namespace sauceDemo.Tests
             cartPage.CheckCartItem(fixItem);
         }
 
+       
 
     }
 }

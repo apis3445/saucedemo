@@ -13,7 +13,7 @@ namespace sauceDemo.Pages
 
         public LoginPage(IPage page) : base(page)
         {
-
+            
         }
 
         public async Task Goto() => await Page.GotoAsync(Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS));

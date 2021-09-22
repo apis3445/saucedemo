@@ -10,10 +10,12 @@ namespace sauceDemo.Base
     {
         public IPage Page { get; set; }
 
-        public async Task<IPage> InitalizePlaywright(string browserType, BrowserTypeLaunchOptions launchOptions)
+        public async Task<IPage> InitalizePlaywright()
         {
             var playwright = await Playwright.CreateAsync();
-            IBrowser browser = null;
+            string browserType = Environment.GetEnvironmentVariable(Constants.BROWSER_TYPE);
+            BrowserTypeLaunchOptions launchOptions = new BrowserTypeLaunchOptions { Headless = false };
+            IBrowser browser;
             switch (browserType)
             {
                 case "Chromium":

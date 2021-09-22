@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using sauceDemo.Base;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
@@ -18,7 +19,8 @@ namespace sauceDemo.Tests
         [TestInitialize]
         public async Task Setup()
         {
-            page = Initialize.Page;
+            PlaywrightDriver playwrightDriver = new PlaywrightDriver();
+            page = await playwrightDriver.InitalizePlaywright();
             loginPage = new LoginPage(page);
             await loginPage.Goto();
 
