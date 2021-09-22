@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
 
 namespace sauceDemo.Pages
@@ -15,7 +16,7 @@ namespace sauceDemo.Pages
 
         }
 
-        public async Task Goto() => await Page.GotoAsync(Constants.BASE_ADDRESS);
+        public async Task Goto() => await Page.GotoAsync(Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS));
 
         public async Task SetUserAsync(string user) => await Page.TypeAsync(userNameInputLocator, user);
 

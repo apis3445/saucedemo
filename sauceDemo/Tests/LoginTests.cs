@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using sauceDemo.Pages;
@@ -10,18 +11,14 @@ namespace sauceDemo.Tests
     {
         private const string genericPassword = "secret_sauce";
         private const string standardUser = "standard_user";
-
-
-        private IBrowser browser;
+        private string BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
         private IPage page;
         LoginPage loginPage;
 
         [TestInitialize]
         public async Task Setup()
         {
-            var playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
-            page = await browser.NewPageAsync();
+            page = Initialize.Page;
             loginPage = new LoginPage(page);
             await loginPage.Goto();
 
@@ -29,13 +26,13 @@ namespace sauceDemo.Tests
 
         [TestMethod]
         [DataRow(standardUser, genericPassword)]
-        public async Task Login_WithValidUser_NavigatesToProductPageAsync(string user, string password)
+        public async Task Login_WithValidUser_NavigatesToInventoryPageAsync(string user, string password)
         {
             //Arrange
             //Act
             await loginPage.LoginAsync(user, password);
             //Assert
-            Assert.AreEqual(Constants.BASE_ADDRESS + Constants.INVENTORY_PAGE, page.Url);
+            Assert.AreEqual(BaseAddress + Constants.INVENTORY_PAGE, page.Url);
         }
 
         [TestMethod]
@@ -62,7 +59,6 @@ namespace sauceDemo.Tests
             Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync());
         }
 
-
         [TestMethod]
         public async Task Logout_FromHomePage_RedirectToLogin()
         {
@@ -72,7 +68,7 @@ namespace sauceDemo.Tests
             //Act
             await inventoryPage.Logout();
             //Assert
-            Assert.AreEqual(Constants.BASE_ADDRESS , page.Url);
+            Assert.AreEqual(BaseAddress, page.Url);
         }
 
     }

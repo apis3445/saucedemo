@@ -10,7 +10,6 @@ namespace sauceDemo.Tests
     [TestClass]
     public class InventoryTests
     {
-        private IBrowser browser;
         private IPage page;
         LoginPage loginPage;
         InventoryPage inventoryPage;
@@ -20,9 +19,7 @@ namespace sauceDemo.Tests
         [TestInitialize]
         public async Task Setup()
         {
-            var playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
-            page = await browser.NewPageAsync();
+            page = Initialize.Page;
             loginPage = new LoginPage(page);
             await loginPage.Goto();
             await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
@@ -42,6 +39,22 @@ namespace sauceDemo.Tests
             items = inventoryPage.Items;
             //Assert
             Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer));
+        }
+
+        [TestMethod]
+        public async Task AddItems_FromInventory_ShouldAllItemsAddedToShoppingCart()
+        {
+            //Arrange
+            int total = 3;
+            await inventoryPage.AddItemsAsync(total);
+            //Assert
+            CartPage cartPage = new CartPage(page);
+            cartPage.CheckItemsInCart(total);
+            await inventoryPage.shopingCartIcon.ClickAsync();
+            for (int i = 0; i < total; i++)
+            {
+                cartPage.CheckCartItem(inventoryPage.itemsName[i]);
+            }
         }
 
         ///Option 1 
@@ -77,20 +90,6 @@ namespace sauceDemo.Tests
             cartPage.CheckCartItem(fixItem);
         }
 
-        [TestMethod]
-        public async Task AddItems_FromInventory_ShouldAllItemsAddedToShoppingCart()
-        {
-            //Arrange
-            int total = 3;
-            await inventoryPage.AddItemsAsync(total);
-            //Assert
-            CartPage cartPage = new CartPage(page);
-            cartPage.CheckItemsInCart(total);
-            await inventoryPage.shopingCartIcon.ClickAsync();
-            for (int i = 0; i < total; i++)
-            {
-                cartPage.CheckCartItem(inventoryPage.itemsName[i]);
-            }
-        }
+
     }
 }

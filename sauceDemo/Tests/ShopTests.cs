@@ -8,7 +8,6 @@ namespace sauceDemo.Tests
     [TestClass]
     public class ShopTests
     {
-        private IBrowser browser;
         private IPage page;
         LoginPage loginPage;
         InventoryPage inventoryPage;
@@ -16,9 +15,7 @@ namespace sauceDemo.Tests
         [TestInitialize]
         public async Task Setup()
         {
-            var playwright = await Playwright.CreateAsync();
-            browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false });
-            page = await browser.NewPageAsync();
+            page = Initialize.Page;
             loginPage = new LoginPage(page);
             await loginPage.Goto();
             await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
