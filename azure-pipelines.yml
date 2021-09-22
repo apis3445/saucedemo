@@ -37,7 +37,7 @@ steps:
 - task: CmdLine@2
   displayName: "Install .NET Global"
   inputs:
-    script: 'dotnet tool install Microsoft.Playwright.CLI'
+    script: 'dotnet tool install --global Microsoft.Playwright.CLI'
 
 - task: DotNetCoreCLI@2
   inputs:
