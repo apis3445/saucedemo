@@ -32,3 +32,21 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Install Playwright CLI
+  inputs:
+    command: custom
+    custom: 'tool '
+    arguments: install Microsoft.Playwright.CLI
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+- task: DotNetCoreCLI@2
+  displayName: Run Playwright Install
+  inputs:
+    command: custom
+    custom: 'tool '
+    arguments: run playwright install
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
