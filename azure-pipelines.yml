@@ -12,7 +12,10 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '5.0.301'
-
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
 - task: DotNetCoreCLI@2
   displayName: 'Install PlayWright CLI'
   inputs:
@@ -21,13 +24,11 @@ steps:
     arguments: 'install --global Microsoft.Playwright.CLI'
 
 - task: CmdLine@2
+  displayName: 'Install PlayWright'
   inputs:
     script: 'playwright install'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    command: 'build'
+
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
