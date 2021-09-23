@@ -32,4 +32,4 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: /p:settings=.runsettings
+    arguments: /p:settings=sauceDemo/.runsettings
