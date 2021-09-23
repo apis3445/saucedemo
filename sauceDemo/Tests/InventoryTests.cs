@@ -14,7 +14,6 @@ namespace sauceDemo.Tests
         private IPage page;
         LoginPage loginPage;
         InventoryPage inventoryPage;
-
         private string fixItem = "Sauce Labs Onesie";
 
         [TestInitialize]

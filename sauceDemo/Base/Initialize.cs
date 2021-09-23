@@ -11,11 +11,12 @@ namespace sauceDemo
     {
 
         public static IPage Page;
+        public static string BaseAddress;
 
         [AssemblyInitialize]
         public static void  AssemblyInitialize(TestContext context)
         {
-          
+            BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
         }
 
         [AssemblyCleanup]

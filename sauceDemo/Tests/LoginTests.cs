@@ -12,7 +12,7 @@ namespace sauceDemo.Tests
     {
         private const string genericPassword = "secret_sauce";
         private const string standardUser = "standard_user";
-        private string BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
+        private string BaseAddress = Initialize.BaseAddress;
         private IPage page;
         LoginPage loginPage;
 
@@ -34,7 +34,7 @@ namespace sauceDemo.Tests
             //Act
             await loginPage.LoginAsync(user, password);
             //Assert
-            Assert.AreEqual(BaseAddress + Constants.INVENTORY_PAGE, page.Url);
+            Assert.AreEqual(BaseAddress +  Constants.INVENTORY_PAGE, page.Url);
         }
 
         [TestMethod]

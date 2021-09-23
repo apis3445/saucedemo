@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace sauceDemo.Pages
 {
@@ -10,13 +11,13 @@ namespace sauceDemo.Pages
         private string passwordInputLocator = "input[data-test='password']";
         private string loginButtonLocator = "input[data-test='login-button']";
         private string errorMessage = "data-test=error";
-
+        
         public LoginPage(IPage page) : base(page)
         {
             
         }
 
-        public async Task Goto() => await Page.GotoAsync(Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS));
+        public async Task Goto() => await Page.GotoAsync(Initialize.BaseAddress);
 
         public async Task SetUserAsync(string user) => await Page.TypeAsync(userNameInputLocator, user);
 
