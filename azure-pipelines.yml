@@ -2,7 +2,7 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 variables:
   buildConfiguration: 'Release'
@@ -13,14 +13,10 @@ steps:
     packageType: 'sdk'
     version: '5.0.301'
 
-- task: CmdLine@2
-  displayName: "Microsoft.Playwright.CLI"
-  inputs:
-    script: 'dotnet tool install --global Microsoft.Playwright.CLI'
-
-- task: CmdLine@2
-  inputs:
-    script: 'dotnet run playwright install'
+- powershell: | 
+   dotnet tool install --global Microsoft.Playwright.CLI
+   playwright install
+  displayName: 'Install Playwright'
 
 - task: DotNetCoreCLI@2
   inputs:
