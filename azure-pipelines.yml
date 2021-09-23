@@ -12,27 +12,15 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '5.0.301'
-- task: DotNetCoreCLI@2
-  displayName: New Manifest for tool
-  inputs:
-    command: custom
-    custom: 'new '
-    arguments: tool-manifest
-- task: DotNetCoreCLI@2
-  displayName: Install Playwright CLI
-  inputs:
-    command: custom
-    custom: 'tool '
-    arguments: install Microsoft.Playwright.CLI
+
+- powershell: | 
+   dotnet tool install --global Microsoft.Playwright.CLI
+   playwright install
+  displayName: 'Install Playwright'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-- task: DotNetCoreCLI@2
-  displayName: Run Playwright Install
-  inputs:
-    command: custom
-    custom: 'tool '
-    arguments: run playwright install
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
