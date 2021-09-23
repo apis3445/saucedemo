@@ -20,7 +20,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'playwright install'
+    script: 'dotnet run playwright install'
 
 - task: DotNetCoreCLI@2
   inputs:
