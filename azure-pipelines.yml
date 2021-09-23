@@ -13,10 +13,15 @@ steps:
     packageType: 'sdk'
     version: '5.0.301'
 
-- powershell: | 
-   dotnet tool install --global Microsoft.Playwright.CLI
-   playwright install
-  displayName: 'Install Playwright'
+- task: CmdLine@2
+  displayName: "Microsoft.Playwright.CLI"
+  inputs:
+    script: 'dotnet tool install --global Microsoft.Playwright.CLI'
+
+- task: CmdLine@2
+  inputs:
+    script: 'playwright install'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
