@@ -28,10 +28,8 @@ steps:
   inputs:
     script: 'playwright install'
 
-
-
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
     command: 'test'
-    arguments: settings .runsettings
+    arguments: --settings .runsettings
