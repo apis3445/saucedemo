@@ -29,6 +29,25 @@ namespace sauceDemo.Tests
             inventoryPage = new InventoryPage(page);
         }
 
+        /// <summary>
+        /// As a best practice and with custom code snippet
+        //If you want to use this format I attached a code snippet to create the unit test with shortcuts.
+        //Unzip the files and copy to
+        //%USERPROFILE%\Documents\Visual Studio 2019\Code Snippets\Visual C#\My Code Snippets
+        ///After you can write uat from VS and press tab to get a template for async test
+        ///[TestMethod]
+        //public async Task UoW_InitialCondition_ExpectedResult()
+        //{
+            //Arrange
+
+            //Act
+
+            //Assert
+
+        //}
+        //or ut for sync test case
+        /// UoW is unit of work
+        /// </summary>
         [TestMethod]      
         public void SortProducts_ByLowPrice_SortByLowestPrice()
         {
@@ -92,8 +111,5 @@ namespace sauceDemo.Tests
             cartPage.CheckItemsInCart(1);
             cartPage.CheckCartItem(fixItem);
         }
-
-       
-
     }
 }

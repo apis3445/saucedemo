@@ -8,6 +8,8 @@ namespace sauceDemo.Pages
 {
     public class CartPage : BasePage
     {
+        //Added data-test in private to reuse to click or get test if is needed check some
+        //translations in the future
         private string continueShoppingButton = "data-test=continue-shopping";
         private string checkoutButton = "data-test=checkout";
 
@@ -15,6 +17,9 @@ namespace sauceDemo.Pages
         {
         }
 
+        /// <summary>
+        /// Reeturns the list of items. Is list due to can be dynamic, sometimes can return 5, another 15 or higher
+        /// </summary>
         public List<CartItem> Items
         {
             get
@@ -30,18 +35,30 @@ namespace sauceDemo.Pages
             }
         }
 
+        //Async due to the framework is async
         public async Task ClickCheckoutAsync()
         {
             await Page.ClickAsync(checkoutButton);
+            //Added screenshot if exists plas to include in report portal. Can be added a datetime
+            //instead of replace.
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "Checkout.png" });
         }
 
-        public async Task ClickContinueShopping()
+
+        /// <summary>
+        /// Click in continue shopping
+        /// </summary>
+        /// <returns></returns>
+        public async Task ClickContinueShoppingAsync()
         {
             await Page.ClickAsync(continueShoppingButton);
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "ContinueShopping.png" });
         }
 
+        /// <summary>
+        /// Check item to reuse in different test cases
+        /// </summary>
+        /// <param name="item">item to check</param>
         public void CheckCartItem(string item)
         {
             var cartItem = Items.Find(i => i.Name == item);
@@ -49,6 +66,10 @@ namespace sauceDemo.Pages
             Assert.AreEqual(item, cartItem.Name);
         }
 
+        /// <summary>
+        /// Check total of items to reuse in different test cases
+        /// </summary>
+        /// <param name="total">Total the items in the cart</param>
         public void CheckItemsInCart(int total)
         {
             Assert.AreEqual(total, ItemsInShoppingCart);
