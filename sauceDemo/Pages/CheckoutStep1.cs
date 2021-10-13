@@ -40,7 +40,7 @@ namespace sauceDemo.Pages
         public async Task ClickContinueAsync()
         {
             await Page.ClickAsync(continueButtonLocator);
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "Continue.png" });
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "Continue"+ DateTime.Now.ToLongDateString() + ".png" });
         }
     }
 }

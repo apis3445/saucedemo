@@ -31,7 +31,7 @@ namespace sauceDemo.Pages
         public async Task ClickLogin()
         {
             await Page.ClickAsync(loginButtonLocator);
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "LoginClick.png" });
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "LoginClick "+ DateTime.Now.ToLongDateString() + ".png" });
         }
 
         public async Task<bool> HasError() =>  await Page.IsVisibleAsync(errorMessage);

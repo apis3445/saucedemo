@@ -13,6 +13,5 @@ namespace sauceDemo.Components
 
         public decimal Quantity => int.Parse(element.QuerySelectorAsync(quantity).Result.TextContentAsync().Result);
 
-        
     }
 }

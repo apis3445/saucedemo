@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,9 +40,9 @@ namespace sauceDemo.Pages
         public async Task ClickCheckoutAsync()
         {
             await Page.ClickAsync(checkoutButton);
-            //Added screenshot if exists plas to include in report portal. Can be added a datetime
-            //instead of replace.
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "Checkout.png" });
+            //Added screenshot maybe check environment variabl to save in local development or connect
+            //to third party report tool like report portal
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "Checkout" + DateTime.Now.ToLongDateString() + ".png" }); ;
         }
 
 
@@ -52,7 +53,7 @@ namespace sauceDemo.Pages
         public async Task ClickContinueShoppingAsync()
         {
             await Page.ClickAsync(continueShoppingButton);
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "ContinueShopping.png" });
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "ContinueShopping"+ DateTime.Now.ToLongDateString() + ".png" });
         }
 
         /// <summary>

@@ -22,7 +22,6 @@ namespace sauceDemo.Tests
             page = await playwrightDriver.InitalizePlaywright();
             loginPage = new LoginPage(page);
             await loginPage.Goto();
-
         }
 
         [TestMethod]
@@ -71,6 +70,5 @@ namespace sauceDemo.Tests
             //Assert
             Assert.AreEqual(BaseAddress, page.Url);
         }
-
     }
 }
