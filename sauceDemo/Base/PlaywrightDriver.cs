@@ -4,8 +4,6 @@ using Microsoft.Playwright;
 
 namespace sauceDemo.Base
 {
-
-
     public class PlaywrightDriver
     {
         public IPage Page { get; set; }
@@ -30,10 +28,7 @@ namespace sauceDemo.Base
                 default:
                     browser = await playwright.Chromium.LaunchAsync(launchOptions);
                     break;
-            }
-            
-            
-                
+            }           
             Page = await browser.NewPageAsync();
             return Page;
         }
