@@ -11,7 +11,7 @@ For installl Playwright for C#
   dotnet tool install --global Microsoft.Playwright.CLI 
 ```
  
- 2. Install Playwright (this include the browsers Chromium, Firefox, Webkit)
+ 2. Install Playwright (this include the browsers Chromium, Firefox, Webkit). Execute this coomand inside the project path. Sample path c:\Projects\SsauceDemo
  ```console
    playwright install
 ```
