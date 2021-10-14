@@ -13,8 +13,7 @@ For installl Playwright for C#
  
  2. Install Playwright (this include the browsers Chromium, Firefox, Webkit)
  ```console
-     playwright install
-   dotnet tool install --global Microsoft.Playwright.CLI 
+   playwright install
 ```
 
 ## Run tests
