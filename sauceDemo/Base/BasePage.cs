@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace sauceDemo
 {
@@ -38,6 +40,11 @@ namespace sauceDemo
                else
                     return 0;
             }
+        }
+
+        public async Task TakeScreenShootAsync(string name)
+        {
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = name + Guid.NewGuid().ToString() + ".png" });          
         }
     }
 }

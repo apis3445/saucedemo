@@ -42,7 +42,7 @@ namespace sauceDemo.Pages
         public async Task CickFinishAsync()
         {
             await Page.ClickAsync(finishButtonLocator);
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = "finishClick" + DateTime.Now.ToLongDateString() + ".png" });
+            await TakeScreenShootAsync("finishClick");
         }
     }
 }
