@@ -11,9 +11,12 @@ namespace sauceDemo
     public class BasePage
     {
         protected IPage Page;
+
         private string burgerMenuId = "#react-burger-menu-btn";
         private string logoutMenuItem = "#logout_sidebar_link";
         private string shoppingCartBadge = "span.shopping_cart_badge";
+
+        public TestContext TestContext { get; set; }
 
         public BasePage(IPage page)
         {
@@ -44,7 +47,9 @@ namespace sauceDemo
 
         public async Task TakeScreenShootAsync(string name)
         {
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = name + Guid.NewGuid().ToString() + ".png" });          
+            var screenImage = System.IO.Path.Combine(TestContext.DeploymentDirectory, name, Guid.NewGuid().ToString() + ".png");
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage });
+            TestContext.AddResultFile(screenImage);
         }
     }
 }

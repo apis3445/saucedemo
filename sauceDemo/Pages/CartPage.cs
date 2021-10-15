@@ -12,6 +12,7 @@ namespace sauceDemo.Pages
         //translations in the future
         private string continueShoppingButton = "data-test=continue-shopping";
         private string checkoutButton = "data-test=checkout";
+        
 
         public CartPage(IPage page) : base(page)
         {
