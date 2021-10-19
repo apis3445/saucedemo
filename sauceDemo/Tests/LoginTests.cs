@@ -9,30 +9,30 @@ namespace sauceDemo.Tests
     [TestClass]
     public class LoginTests
     {
-        private const string genericPassword = "secret_sauce";
-        private const string standardUser = "standard_user";
-        private string BaseAddress = Initialize.BaseAddress;
-        private IPage page;
-        LoginPage loginPage;
+        private const string _genericPassword = "secret_sauce";
+        private const string _standardUser = "standard_user";
+        private string _baseAddress = Initialize.BaseAddress;
+        private IPage _page;
+        private LoginPage _loginPage;
 
         [TestInitialize]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-            page = await playwrightDriver.InitalizePlaywright();
-            loginPage = new LoginPage(page);
-            await loginPage.Goto();
+            _page = await playwrightDriver.InitalizePlaywright();
+            _loginPage = new LoginPage(_page);
+            await _loginPage.Goto();
         }
 
         [TestMethod]
-        [DataRow(standardUser, genericPassword)]
+        [DataRow(_standardUser, _genericPassword)]
         public async Task Login_WithValidUser_NavigatesToInventoryPageAsync(string user, string password)
         {
             //Arrange
             //Act
-            await loginPage.LoginAsync(user, password);
+            await _loginPage.LoginAsync(user, password);
             //Assert
-            Assert.AreEqual(BaseAddress +  Constants.INVENTORY_PAGE, page.Url);
+            Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url);
         }
 
         [TestMethod]
@@ -40,12 +40,12 @@ namespace sauceDemo.Tests
         {
             //Arrange
             //Act
-            await loginPage.LoginAsync("locked_out_user", genericPassword);
+            await _loginPage.LoginAsync("locked_out_user", _genericPassword);
             //Assert
             //To check if the div with error is visible
-            Assert.IsTrue(await loginPage.HasError(), "Error is not visible");
+            Assert.IsTrue(await _loginPage.HasError(), "Error is not visible");
             //Only if you want to check the error messsage not only error div
-            Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync());
+            Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync());
         }
 
         [TestMethod]
@@ -53,22 +53,22 @@ namespace sauceDemo.Tests
         {
             //Arrange
             //Act
-            await loginPage.LoginAsync("invalidUser", genericPassword);
+            await _loginPage.LoginAsync("invalidUser", _genericPassword);
             //Assert
-            Assert.IsTrue(await loginPage.HasError());
-            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync());
+            Assert.IsTrue(await _loginPage.HasError());
+            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
         }
 
         [TestMethod]
         public async Task Logout_FromHomePage_RedirectToLogin()
         {
             //Arrange
-            await loginPage.LoginAsync(standardUser, genericPassword);
-            InventoryPage inventoryPage = new InventoryPage(page);
+            await _loginPage.LoginAsync(_standardUser, _genericPassword);
+            InventoryPage inventoryPage = new InventoryPage(_page);
             //Act
             await inventoryPage.Logout();
             //Assert
-            Assert.AreEqual(BaseAddress, page.Url);
+            Assert.AreEqual(_baseAddress, _page.Url);
         }
     }
 }

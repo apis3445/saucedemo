@@ -4,14 +4,17 @@ namespace sauceDemo.Components
 {
     public class CartItem: Item
     {
-        private string quantity = "div.cart_quantity";
+        private string _quantityLocator = "div.cart_quantity";
 
         public CartItem(IElementHandle element, string type) : base(element, type)
         {
             
         }
 
-        public decimal Quantity => int.Parse(element.QuerySelectorAsync(quantity).Result.TextContentAsync().Result);
+        /// <summary>
+        /// Quantity for the item
+        /// </summary>
+        public decimal Quantity => int.Parse(element.QuerySelectorAsync(_quantityLocator).Result.TextContentAsync().Result);
 
     }
 }

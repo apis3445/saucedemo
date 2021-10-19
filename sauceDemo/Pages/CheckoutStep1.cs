@@ -6,40 +6,56 @@ namespace sauceDemo.Pages
 {
     public class CheckoutStep1 : BasePage
     {
-        private string firstNameInputLocator = "input[data-test='firstName']";
-        private string lastNameInputLocator = "input[data-test='lastName']";
-        private string postalCodeInputLocator = "input[data-test='postalCode']";
-        private string continueButtonLocator = "input[data-test='continue']";
+        private string _firstNameInputLocator = "input[data-test='firstName']";
+        private string _lastNameInputLocator = "input[data-test='lastName']";
+        private string _postalCodeInputLocator = "input[data-test='postalCode']";
+        private string _continueButtonLocator = "input[data-test='continue']";
+
+        public string FirstName => Page.TextContentAsync(_firstNameInputLocator).Result;
+        public string LastName => Page.TextContentAsync(_lastNameInputLocator).Result;
+        public string PostalCode => Page.TextContentAsync(_postalCodeInputLocator).Result;
 
         public CheckoutStep1(IPage page) : base(page)
         {
         }
 
-        public string FirstName =>  Page.TextContentAsync(firstNameInputLocator).Result;
- 
+        /// <summary>
+        /// Set First Name
+        /// </summary>
+        /// <param name="value">Value for the first name</param>
+        /// <returns></returns>
         public async Task SetFirstNameAsync(string value)
         {
-           await Page.TypeAsync(firstNameInputLocator, value);
+           await Page.TypeAsync(_firstNameInputLocator, value);
         }
-        
-    
-        public string LastName => Page.TextContentAsync(lastNameInputLocator).Result;
 
+        /// <summary>
+        /// Set Last name
+        /// </summary>
+        /// <param name="value">Value for the last name</param>
+        /// <returns></returns>
         public async Task SetLastNameAsync(string value)
         {
-            await Page.TypeAsync(lastNameInputLocator, value);
+            await Page.TypeAsync(_lastNameInputLocator, value);
         }
 
-        public string PostalCode => Page.TextContentAsync(postalCodeInputLocator).Result;
-
+        /// <summary>
+        /// Set postal code
+        /// </summary>
+        /// <param name="value">Postal Code</param>
+        /// <returns></returns>
         public async Task SetPostalCodeAsync(string value)
         {
-            await Page.TypeAsync(postalCodeInputLocator, value);
+            await Page.TypeAsync(_postalCodeInputLocator, value);
         }
 
+        /// <summary>
+        /// Click in continue button
+        /// </summary>
+        /// <returns></returns>
         public async Task ClickContinueAsync()
         {
-            await Page.ClickAsync(continueButtonLocator);
+            await Page.ClickAsync(_continueButtonLocator);
             await TakeScreenShootAsync("ContinueCheckout");
         }
     }

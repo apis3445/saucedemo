@@ -9,19 +9,19 @@ namespace sauceDemo.Tests
     [TestClass]
     public class ShopTests
     {
-        private IPage page;
-        LoginPage loginPage;
-        InventoryPage inventoryPage;
+        private IPage _page;
+        private LoginPage _loginPage;
+        private InventoryPage _inventoryPage;
 
         [TestInitialize]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-            page = await playwrightDriver.InitalizePlaywright();
-            loginPage = new LoginPage(page);
-            await loginPage.Goto();
-            await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
-            inventoryPage = new InventoryPage(page);
+            _page = await playwrightDriver.InitalizePlaywright();
+            _loginPage = new LoginPage(_page);
+            await _loginPage.Goto();
+            await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
+            _inventoryPage = new InventoryPage(_page);
         }
 
         [TestMethod]
@@ -29,26 +29,26 @@ namespace sauceDemo.Tests
         {
             //Arrange
             int total = 2;
-            await inventoryPage.AddItemsAsync(total);
+            await _inventoryPage.AddItemsAsync(total);
             //Act
-            CartPage cartPage = new CartPage(page);
-            await inventoryPage.shopingCartIcon.ClickAsync();
+            CartPage cartPage = new CartPage(_page);
+            await _inventoryPage.ShopingCartIcon.ClickAsync();
             await cartPage.ClickCheckoutAsync();
-            CheckoutStep1 checkoutStep1 = new CheckoutStep1(page);
+            CheckoutStep1 checkoutStep1 = new CheckoutStep1(_page);
             await checkoutStep1.SetFirstNameAsync("Abigail");
             await checkoutStep1.SetLastNameAsync("Armijo");
             await checkoutStep1.SetPostalCodeAsync("27140");
             await checkoutStep1.ClickContinueAsync();
-            CheckoutStep2 checkoutStep2 = new CheckoutStep2(page);
+            CheckoutStep2 checkoutStep2 = new CheckoutStep2(_page);
             //Assert
             Assert.AreEqual(total, checkoutStep2.ItemsInShoppingCart);
             for (int i = 0; i < total; i++)
             {
-                checkoutStep2.CheckCartItem(inventoryPage.itemsName[i]);
+                checkoutStep2.CheckCartItem(_inventoryPage.ItemsName[i]);
             }
             await checkoutStep2.CickFinishAsync();
             //Additional assert to check complete
-            CheckoutComplete checkoutComplete = new CheckoutComplete(page);
+            CheckoutComplete checkoutComplete = new CheckoutComplete(_page);
             Assert.AreEqual("THANK YOU FOR YOUR ORDER", checkoutComplete.Thanks);
         }
     }

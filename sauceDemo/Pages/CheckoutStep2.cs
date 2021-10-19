@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,12 +10,15 @@ namespace sauceDemo.Pages
     {
         //TODO: Add summary info items
 
-        private string finishButtonLocator = "data-test=finish";
+        private string _finishButtonLocator = "data-test=finish";
 
         public CheckoutStep2(IPage page) : base(page)
         {
         }
 
+        /// <summary>
+        /// Items
+        /// </summary>
         public List<CartItem> Items
         {
             get
@@ -41,7 +43,7 @@ namespace sauceDemo.Pages
 
         public async Task CickFinishAsync()
         {
-            await Page.ClickAsync(finishButtonLocator);
+            await Page.ClickAsync(_finishButtonLocator);
             await TakeScreenShootAsync("finishClick");
         }
     }

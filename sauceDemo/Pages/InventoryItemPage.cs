@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 using sauceDemo.Components;
 
 namespace sauceDemo.Pages
@@ -10,6 +9,9 @@ namespace sauceDemo.Pages
         {
         }
 
+        /// <summary>
+        /// Item
+        /// </summary>
         public InventoryItem Item
         {
             get

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using sauceDemo.Base;
 
 namespace sauceDemo
 {
@@ -12,7 +10,6 @@ namespace sauceDemo
 
         public static IPage Page;
         public static string BaseAddress;
-
         public static TestContext TestContext { get; private set; }
 
         [AssemblyInitialize]

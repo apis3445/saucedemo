@@ -7,14 +7,18 @@ namespace sauceDemo.Pages
 {
     public class InventoryPage : BasePage
     {
-        private string comboSort = "data-test=product_sort_container";
-        public List<string> itemsName = new List<string>();
+        private string _comboSortLocator = "data-test=product_sort_container";
+
+        public List<string> ItemsName = new List<string>();
 
         public InventoryPage(IPage page) : base(page)
         {
 
         }
 
+        /// <summary>
+        /// List of items 
+        /// </summary>
         public List<InventoryItem> Items
         {
             get
@@ -30,28 +34,47 @@ namespace sauceDemo.Pages
             }
         }
 
+        /// <summary>
+        /// Sort items by the value
+        /// </summary>
+        /// <param name="value">Value/Text to sort the items</param>
         public void SetSort(string value)
         {
-            Page.SelectOptionAsync(comboSort, value);
+            Page.SelectOptionAsync(_comboSortLocator, value);
         }
 
+        /// <summary>
+        /// Add item t cart by item name
+        /// </summary>
+        /// <param name="itemName">Name of the item to add to the ccart</param>
+        /// <returns></returns>
         public async Task AddToCartByNameAsync(string itemName)
         {
             await Page.ClickAsync($"text={itemName}");
         }
 
-        public async Task AddToCartByIdNameAsync(string itemName)
+        /// <summary>
+        /// Add item by data-test
+        /// </summary>
+        /// <param name="itemName">Data-test value</param>
+        /// <returns></returns>
+        public async Task AddToCartByDataTestNameAsync(string itemName)
         {
             string id = $"data-test=add-to-cart-{itemName.ToLowerInvariant().Replace(" ", "-")}";
             await Page.ClickAsync(id);
         }
 
+        /// <summary>
+        /// Add items from index 0 to toal
+        /// </summary>
+        /// <param name="total">Total the items to add</param>
+        /// <returns></returns>
         public async Task AddItemsAsync(int total)
         {
             for (int i = 0; i < total; i++)
             {
                 await Items[i].Button.ClickAsync();
-                itemsName.Add(Items[i].Name);
+                ItemsName.Add(Items[i].Name);
             }
         }
     }

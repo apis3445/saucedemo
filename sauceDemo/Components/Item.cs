@@ -7,31 +7,44 @@ namespace sauceDemo.Components
     {
         protected IElementHandle element;
 
-        private string name ;
-        private string description;
-        private string price;
-        private string button;
-
+        private string _name;
+        private string _description;
+        private string _price;
+        private string _button;
 
         public Item(IElementHandle element, string type)
         {
             this.element = element;
-            name = $"div.inventory_{type}_name";
-            description = $"div.inventory_{type}_desc";
-            price = $"div.inventory_{type}_price";
-            button = "button.btn_inventory";
+            _name = $"div.inventory_{type}_name";
+            _description = $"div.inventory_{type}_desc";
+            _price = $"div.inventory_{type}_price";
+            _button = "button.btn_inventory";
         }
 
-        
-        public string FormatedPrice => element.QuerySelectorAsync(price).Result.TextContentAsync().Result;
+        /// <summary>
+        /// Formatted Price 
+        /// </summary>
+        public string FormatedPrice => element.QuerySelectorAsync(_price).Result.TextContentAsync().Result;
 
-        public string Name => element.QuerySelectorAsync(name).Result.TextContentAsync().Result;
+        /// <summary>
+        /// Item's name
+        /// </summary>
+        public string Name => element.QuerySelectorAsync(_name).Result.TextContentAsync().Result;
 
-        public string Description => element.QuerySelectorAsync(description).Result.TextContentAsync().Result;
+        /// <summary>
+        /// Item's Description
+        /// </summary>
+        public string Description => element.QuerySelectorAsync(_description).Result.TextContentAsync().Result;
 
+        /// <summary>
+        /// Price
+        /// </summary>
         public decimal Price => decimal.Parse(FormatedPrice.Replace("$", ""));
 
-        public IElementHandle Button => element.QuerySelectorAsync(button).Result;
+        /// <summary>
+        /// Button for the item
+        /// </summary>
+        public IElementHandle Button => element.QuerySelectorAsync(_button).Result;
 
         public async Task ClickButtonAsync()
         {

@@ -9,17 +9,16 @@ namespace sauceDemo.Pages
     public class CartPage : BasePage
     {
         //Added data-test in private to reuse to click or get test if is needed check some
-        //translations in the future
-        private string continueShoppingButton = "data-test=continue-shopping";
-        private string checkoutButton = "data-test=checkout";
+        //translations in the future.
+        private string _continueShoppingButtonLocator = "data-test=continue-shopping";
+        private string _checkoutButtonLocator = "data-test=checkout";
         
-
         public CartPage(IPage page) : base(page)
         {
         }
 
         /// <summary>
-        /// Reeturns the list of items. Is list due to can be dynamic, sometimes can return 5, another 15 or higher
+        /// Reeturns the list of items. Is list due to can be dynamic, sometimes can return 5, another 15 or higher.
         /// </summary>
         public List<CartItem> Items
         {
@@ -39,7 +38,7 @@ namespace sauceDemo.Pages
         //Async due to the framework is async
         public async Task ClickCheckoutAsync()
         {
-            await Page.ClickAsync(checkoutButton);
+            await Page.ClickAsync(_checkoutButtonLocator);
             //Added screenshot maybe check environment variabl to save in local development or connect
             //to third party report tool like report portal
            await TakeScreenShootAsync("Checkout");
@@ -52,7 +51,7 @@ namespace sauceDemo.Pages
         /// <returns></returns>
         public async Task ClickContinueShoppingAsync()
         {
-            await Page.ClickAsync(continueShoppingButton);
+            await Page.ClickAsync(_continueShoppingButtonLocator);
             await TakeScreenShootAsync("ContinueShopping");
         }
 

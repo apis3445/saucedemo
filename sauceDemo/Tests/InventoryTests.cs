@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,21 +10,21 @@ namespace sauceDemo.Tests
     [TestClass]
     public class InventoryTests
     {
-        private IPage page;
-        LoginPage loginPage;
-        InventoryPage inventoryPage;
-        private string fixItem = "Sauce Labs Onesie";
+        private IPage _page;
+        private LoginPage _loginPage;
+        private InventoryPage _inventoryPage;
+        private string _fixItem = "Sauce Labs Onesie";
 
         [TestInitialize]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-            page = await playwrightDriver.InitalizePlaywright();
-            loginPage = new LoginPage(page);
-            await loginPage.Goto();
-            await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
+            _page = await playwrightDriver.InitalizePlaywright();
+            _loginPage = new LoginPage(_page);
+            await _loginPage.Goto();
+            await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
             
-            inventoryPage = new InventoryPage(page);
+            _inventoryPage = new InventoryPage(_page);
         }
 
         /// <summary>
@@ -52,12 +51,12 @@ namespace sauceDemo.Tests
         {
             //Arrange
             var comparer = new ItemComparer();
-            var items = inventoryPage.Items;
+            var items = _inventoryPage.Items;
             var itemsByPriceDes = items.OrderBy(i => i.Price).ToList(); 
             //Act
-            inventoryPage.SetSort("lohi");
-            _ = page.WaitForSelectorAsync("div.inventory_list").Result;
-            items = inventoryPage.Items;
+            _inventoryPage.SetSort("lohi");
+            _ = _page.WaitForSelectorAsync("div.inventory_list").Result;
+            items = _inventoryPage.Items;
             //Assert
             Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer));
         }
@@ -67,14 +66,14 @@ namespace sauceDemo.Tests
         {
             //Arrange
             int total = 3;
-            await inventoryPage.AddItemsAsync(total);
+            await _inventoryPage.AddItemsAsync(total);
             //Assert
-            CartPage cartPage = new CartPage(page);
+            CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(total);
-            await inventoryPage.shopingCartIcon.ClickAsync();
+            await _inventoryPage.ShopingCartIcon.ClickAsync();
             for (int i = 0; i < total; i++)
             {
-                cartPage.CheckCartItem(inventoryPage.itemsName[i]);
+                cartPage.CheckCartItem(_inventoryPage.ItemsName[i]);
             }
         }
 
@@ -84,17 +83,17 @@ namespace sauceDemo.Tests
         {
             //Arrange
             //Act
-            await inventoryPage.AddToCartByNameAsync(fixItem);
-            InventoryItemPage inventoryItemPage = new InventoryItemPage(page);
+            await _inventoryPage.AddToCartByNameAsync(_fixItem);
+            InventoryItemPage inventoryItemPage = new InventoryItemPage(_page);
             await inventoryItemPage.Item.ClickButtonAsync();
             var name = inventoryItemPage.Item.Name;
             //Assert
-            Assert.AreEqual(fixItem, name);
+            Assert.AreEqual(_fixItem, name);
             Assert.AreEqual("Remove", await inventoryItemPage.Item.Button.TextContentAsync());
-            await inventoryPage.shopingCartIcon.ClickAsync();
-            CartPage cartPage = new CartPage(page);
+            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
-            cartPage.CheckCartItem(fixItem);
+            cartPage.CheckCartItem(_fixItem);
         }
 
         ///Option 2
@@ -103,12 +102,12 @@ namespace sauceDemo.Tests
         {
             //Arrange
             //Act
-            await inventoryPage.AddToCartByIdNameAsync(fixItem);
-            await inventoryPage.shopingCartIcon.ClickAsync();
+            await _inventoryPage.AddToCartByDataTestNameAsync(_fixItem);
+            await _inventoryPage.ShopingCartIcon.ClickAsync();
             //Assert
-            CartPage cartPage = new CartPage(page);
+            CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
-            cartPage.CheckCartItem(fixItem);
+            cartPage.CheckCartItem(_fixItem);
         }
     }
 }
