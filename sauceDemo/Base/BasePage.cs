@@ -16,8 +16,7 @@ namespace sauceDemo
         private string logoutMenuItem = "#logout_sidebar_link";
         private string shoppingCartBadge = "span.shopping_cart_badge";
 
-        public TestContext TestContext { get; set; }
-
+        
         public BasePage(IPage page)
         {
             this.Page = page;
@@ -47,9 +46,11 @@ namespace sauceDemo
 
         public async Task TakeScreenShootAsync(string name)
         {
-            var screenImage = System.IO.Path.Combine(TestContext.DeploymentDirectory, name, Guid.NewGuid().ToString() + ".png");
+            
+            var screenImage = System.IO.Path.Combine(Initialize.TestContext.DeploymentDirectory, name, Guid.NewGuid().ToString() + ".png");
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage });
-            TestContext.AddResultFile(screenImage);
+            Initialize.TestContext.AddResultFile(screenImage);
+            
         }
     }
 }

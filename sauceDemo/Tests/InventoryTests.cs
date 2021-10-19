@@ -23,7 +23,6 @@ namespace sauceDemo.Tests
             page = await playwrightDriver.InitalizePlaywright();
             loginPage = new LoginPage(page);
             await loginPage.Goto();
-            await page.Context.ClearCookiesAsync();
             await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
             
             inventoryPage = new InventoryPage(page);
