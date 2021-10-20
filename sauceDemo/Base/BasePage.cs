@@ -49,8 +49,9 @@ namespace sauceDemo
         public async Task TakeScreenShootAsync(string name)
         {
             var screenImage = System.IO.Path.Combine(Initialize.TestContext.DeploymentDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage});
-            if (string.IsNullOrEmpty(screenImage))
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage, FullPage = true});
+
+            if (!System.IO.File.Exists(screenImage))
             {
                 throw new ArgumentException("Error", nameof(screenImage));
             }
