@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace sauceDemo
 {
@@ -50,12 +49,12 @@ namespace sauceDemo
         public async Task TakeScreenShootAsync(string name)
         {
             var screenImage = System.IO.Path.Combine(Initialize.TestContext.DeploymentDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage });
+            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage});
             Initialize.TestContext.AddResultFile(screenImage);  
         }
 
         /// <summary>
-        /// Click in the hamburguer menu
+        /// Click in the hamburger menu
         /// </summary>
         /// <returns></returns>
         public async Task ClickMenu() => await Page.ClickAsync(_burgerMenuId);

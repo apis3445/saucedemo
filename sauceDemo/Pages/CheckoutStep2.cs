@@ -34,6 +34,10 @@ namespace sauceDemo.Pages
             }
         }
 
+        /// <summary>
+        /// Check item in the cart
+        /// </summary>
+        /// <param name="item">Item to check</param>
         public void CheckCartItem(string item)
         {
             var cartItem = Items.Find(i => i.Name == item);
@@ -41,6 +45,10 @@ namespace sauceDemo.Pages
             Assert.AreEqual(item, cartItem.Name);
         }
 
+        /// <summary>
+        /// Click in finish button
+        /// </summary>
+        /// <returns></returns>
         public async Task CickFinishAsync()
         {
             await Page.ClickAsync(_finishButtonLocator);

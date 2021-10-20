@@ -25,7 +25,7 @@ namespace sauceDemo.Tests
         }
 
         [TestMethod]
-        public async Task AddItems_FollowAllSteps_ShouldCompleteTheOrder()
+        public async Task AddItemsToShop_FollowAllSteps_ShouldCompleteTheOrder()
         {
             //Arrange
             int total = 2;
