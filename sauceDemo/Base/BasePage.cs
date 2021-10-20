@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace sauceDemo
 {
@@ -49,11 +51,13 @@ namespace sauceDemo
         /// <returns></returns>
         public async Task TakeScreenShootAsync(string name)
         {
-            var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + ".png");
-            await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage, FullPage = true});
+            var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
+            var imageBytes = await Page.ScreenshotAsync(new PageScreenshotOptions { FullPage = true});
+            File.WriteAllBytes(screenImage,imageBytes);
             TestContext.AddTestAttachment(screenImage);  
         }
 
+    
         /// <summary>
         /// Click in the hamburger menu
         /// </summary>
