@@ -50,6 +50,10 @@ namespace sauceDemo
         {
             var screenImage = System.IO.Path.Combine(Initialize.TestContext.DeploymentDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage});
+            if (string.IsNullOrEmpty(screenImage))
+            {
+                throw new ArgumentException("Error", nameof(screenImage));
+            }
             Initialize.TestContext.AddResultFile(screenImage);  
         }
 

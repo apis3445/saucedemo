@@ -20,6 +20,7 @@ namespace sauceDemo.Tests
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
             _page = await playwrightDriver.InitalizePlaywright();
+
             _loginPage = new LoginPage(_page);
             await _loginPage.Goto();
             await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
@@ -28,6 +29,7 @@ namespace sauceDemo.Tests
         }
 
         /// <summary>
+        /// Sort Products test
         /// </summary>
         /// <remarks>
         ///     As a best practice and with custom code snippet
