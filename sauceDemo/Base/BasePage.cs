@@ -49,7 +49,7 @@ namespace sauceDemo
         /// <returns></returns>
         public async Task TakeScreenShootAsync(string name)
         {
-            var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
+            var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + ".png");
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage, FullPage = true});
             TestContext.AddTestAttachment(screenImage);  
         }
