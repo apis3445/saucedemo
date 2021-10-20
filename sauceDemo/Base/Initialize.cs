@@ -11,13 +11,13 @@ namespace sauceDemo
         public static IPage Page;
         public static string BaseAddress;
 
-        [SetUp]
+        [OneTimeSetUp]
         public static void  Setup()
         {
-            BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
+           BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public static void AssemblyCleanup()
         {
             
