@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
-    [TestClass]
+    
     public class InventoryTests
     {
         private IPage _page;
@@ -15,7 +15,7 @@ namespace sauceDemo.Tests
         private InventoryPage _inventoryPage;
         private string _fixItem = "Sauce Labs Onesie";
 
-        [TestInitialize]
+        [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
@@ -31,29 +31,7 @@ namespace sauceDemo.Tests
         /// <summary>
         /// Sort Products test
         /// </summary>
-        /// <remarks>
-        ///     As a best practice and with custom code snippet
-        //      If you want to use this format I attached a code snippet to create the unit test with shortcuts.
-        //      Unzip the files and copy to
-        //      %USERPROFILE%\Documents\Visual Studio 2019\Code Snippets\Visual C#\My Code Snippets
-        ///
-        ///     After you can write uat from VS and press tab to get a template for async test
-        ///     
-        ///     [TestMethod]
-        //      public async Task UoW_InitialCondition_ExpectedResult()
-        //      {
-        //          //Arrange
-        //
-        //          //Act
-        //
-        //          //Assert
-        //
-        //      }
-        //
-        //      Or ut for sync test case
-        ///     UoW is unit of work
-        /// </remarks>
-        [TestMethod]      
+        [Test]
         public void SortProducts_ByLowPrice_SortByLowestPrice()
         {
             //Arrange
@@ -68,7 +46,7 @@ namespace sauceDemo.Tests
             Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer));
         }
 
-        [TestMethod]
+        [Test]
         public async Task AddItems_FromInventory_ShouldAllItemsAddedToShoppingCart()
         {
             //Arrange
@@ -85,7 +63,7 @@ namespace sauceDemo.Tests
         }
 
         ///Option 1 
-        [TestMethod]
+        [Test]
         public async Task AddItem_FromInventoryItem_AddItemToShoppingCartAsync()
         {
             //Arrange
@@ -104,7 +82,7 @@ namespace sauceDemo.Tests
         }
 
         ///Option 2
-        [TestMethod]
+        [Test]
         public async Task AddItem_FromButtonText_AddItemToShoppingCartAsync()
         {
             //Arrange

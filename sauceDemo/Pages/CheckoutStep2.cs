@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using sauceDemo.Components;
 
 namespace sauceDemo.Pages

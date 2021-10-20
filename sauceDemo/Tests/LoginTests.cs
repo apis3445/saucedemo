@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
-    [TestClass]
     public class LoginTests
     {
         private const string _genericPassword = "secret_sauce";
@@ -15,7 +14,7 @@ namespace sauceDemo.Tests
         private IPage _page;
         private LoginPage _loginPage;
 
-        [TestInitialize]
+        [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
@@ -24,8 +23,8 @@ namespace sauceDemo.Tests
             await _loginPage.Goto();
         }
 
-        [TestMethod]
-        [DataRow(_standardUser, _genericPassword)]
+        [Test]
+        [TestCase(_standardUser, _genericPassword)]
         public async Task Login_WithValidUser_NavigatesToInventoryPageAsync(string user, string password)
         {
             //Arrange
@@ -35,7 +34,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
         {
             //Arrange
@@ -48,7 +47,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync());
         }
 
-        [TestMethod]
+        [Test]
         public async Task Login_WithInvalidUser_ShowsLockedErrorMessage()
         {
             //Arrange
@@ -59,7 +58,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
         }
 
-        [TestMethod]
+        [Test]
         public async Task Logout_FromHomePage_RedirectToLogin()
         {
             //Arrange

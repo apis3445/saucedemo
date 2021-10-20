@@ -1,25 +1,23 @@
 ﻿using System;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace sauceDemo
 {
-    [TestClass]
+    [SetUpFixture]
     public class Initialize
     {
 
         public static IPage Page;
         public static string BaseAddress;
-        public static TestContext TestContext { get; private set; }
 
-        [AssemblyInitialize]
-        public static void  AssemblyInitialize(TestContext context)
+        [SetUp]
+        public static void  Setup()
         {
             BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
-            TestContext = context;
         }
 
-        [AssemblyCleanup]
+        [TearDown]
         public static void AssemblyCleanup()
         {
             

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
+using NUnit.Framework;
 
 namespace sauceDemo
 {
@@ -48,14 +49,9 @@ namespace sauceDemo
         /// <returns></returns>
         public async Task TakeScreenShootAsync(string name)
         {
-            var screenImage = System.IO.Path.Combine(Initialize.TestContext.DeploymentDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
+            var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
             await Page.ScreenshotAsync(new PageScreenshotOptions { Path = screenImage, FullPage = true});
-
-            if (!System.IO.File.Exists(screenImage))
-            {
-                throw new ArgumentException("Error", nameof(screenImage));
-            }
-            Initialize.TestContext.AddResultFile(screenImage);  
+            TestContext.AddTestAttachment(screenImage);  
         }
 
         /// <summary>

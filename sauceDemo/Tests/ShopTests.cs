@@ -1,19 +1,18 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
-    [TestClass]
     public class ShopTests
     {
         private IPage _page;
         private LoginPage _loginPage;
         private InventoryPage _inventoryPage;
 
-        [TestInitialize]
+        [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
@@ -24,7 +23,7 @@ namespace sauceDemo.Tests
             _inventoryPage = new InventoryPage(_page);
         }
 
-        [TestMethod]
+        [Test]
         public async Task AddItemsToShop_FollowAllSteps_ShouldCompleteTheOrder()
         {
             //Arrange

@@ -39,3 +39,25 @@ BROWSER_TYPE : Chromium or Firefox or Webkit
 2. Right click in the ... button and click in Run Pipeline
 3. Change the variables if is needed
 4. Click in Run
+
+### Add new test
+
+As a best practice and with custom code snippet
+If you want to use this format I attached a code snippet to create the unit test with shortcuts.
+Unzip the files and copy to
+%USERPROFILE%\Documents\Visual Studio 2019\Code Snippets\Visual C#\My Code Snippets
+
+After you can write uat from VS and press tab to get a template for async test
+
+[TestMethod]
+public async Task UoW_InitialCondition_ExpectedResult()
+{
+    //Arrange
+    
+    //Act
+    
+    //Assert
+    
+ }
+ Or write ut for sync test case
+ UoW is unit of work
