@@ -4,14 +4,14 @@ POC to E2E test with Playwright
 
 ## Setup Playwright
 
-For installl Playwright for C#
+Install Playwright for C#
 
 1. Install the Playwright tool with the next command 
 ```console
   dotnet tool install --global Microsoft.Playwright.CLI 
 ```
  
- 2. Install Playwright (this include the browsers Chromium, Firefox, Webkit). Execute this coomand inside the project path. Sample path c:\Projects\SsauceDemo
+ 2. Install Playwright (this includes the browsers Chromium, Firefox, Webkit). Execute this command inside the project path. Sample path c:\Projects\SsauceDemo
  ```console
    playwright install
 ```
