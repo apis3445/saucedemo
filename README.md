@@ -35,19 +35,48 @@ BROWSER_TYPE : Chromium or Firefox or Webkit
 
 ### Azure Devops
 
+Request access to azure devops by mail with a microsoft email
+
 1. Go to pipelines
 2. Right click in the ... button and click in Run Pipeline
 3. Change the variables if is needed
 4. Click in Run
 
+You can run the pipeline and manually change the variable BROWSER_TYPE
+to Chromium or Firefox or Webkit to test with different browsers
+and BASE_ADDRESS to test with different URLs
+
+You can check the reports in Azure Devops
+
+### Reports
+
+For additional reports to Azure Devops
+
+Integration with third party software like saucelabs, browserstack, applitools is only
+supported to NodeJS (JS/Typescript)
+
+With NUnit you can integrate with Report Portal
+
+https://reportportal.io/
+
 ### Add new test
 
-As a best practice and with custom code snippet
-If you want to use this format I attached a code snippet to create the unit test with shortcuts.
-Unzip the files and copy to
+As a best practice you can add a custom snippet to Visual Studio (windows) to generate the
+code for the test cases with the next format:
+
+UoW_InitialCondition_ExpectedResult
+
+UoW is Unit of work
+
+You can replace the [TestMethod] to [Test] in the xml file
+
+You can clone the files from this repo
+https://gist.github.com/osmyn/906c917653a30864cb52dee02c36c14e
+
+Copy the filess to
 %USERPROFILE%\Documents\Visual Studio 2019\Code Snippets\Visual C#\My Code Snippets
 
-After you can write uat from VS and press tab to get a template for async test
+After you can write "uat" from VS and press tab to get a template for async test
 
 [TestMethod]
 public async Task UoW_InitialCondition_ExpectedResult()
@@ -59,5 +88,18 @@ public async Task UoW_InitialCondition_ExpectedResult()
     //Assert
     
  }
- Or write ut for sync test case
- UoW is unit of work
+
+Or write "ut" for sync test case
+
+[TestMethod]
+public void UoW_InitialCondition_ExpectedResult()
+{
+	//Arrange
+	$end$
+
+	//Act
+
+
+	//Assert
+
+}]
