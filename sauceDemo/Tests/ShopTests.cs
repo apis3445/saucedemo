@@ -24,7 +24,7 @@ namespace sauceDemo.Tests
         }
 
         [Test]
-        public async Task AddItemsToShop_FollowAllSteps_ShouldCompleteTheOrder()
+        public async Task AddItemsToShop_CompletePurchsse_ShouldShowsConfirmationPageAsync()
         {
             //Arrange
             int total = 2;

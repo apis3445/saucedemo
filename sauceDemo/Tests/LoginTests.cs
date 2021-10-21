@@ -25,13 +25,24 @@ namespace sauceDemo.Tests
 
         [Test]
         [TestCase(_standardUser, _genericPassword)]
-        public async Task Login_WithValidUser_NavigatesToInventoryPageAsync(string user, string password)
+        public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
         {
             //Arrange
             //Act
             await _loginPage.LoginAsync(user, password);
             //Assert
             Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url);
+        }
+
+        [Test]
+        public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
+        {
+            //Arrange
+            //Act
+            await _loginPage.LoginAsync("invalidUser", _genericPassword);
+            //Assert
+            Assert.IsTrue(await _loginPage.HasError());
+            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
         }
 
         [Test]
@@ -45,17 +56,6 @@ namespace sauceDemo.Tests
             Assert.IsTrue(await _loginPage.HasError(), "Error is not visible");
             //Only if you want to check the error messsage not only error div
             Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync());
-        }
-
-        [Test]
-        public async Task Login_WithInvalidUser_ShowsLockedErrorMessage()
-        {
-            //Arrange
-            //Act
-            await _loginPage.LoginAsync("invalidUser", _genericPassword);
-            //Assert
-            Assert.IsTrue(await _loginPage.HasError());
-            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
         }
 
         [Test]

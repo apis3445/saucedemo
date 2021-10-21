@@ -28,11 +28,8 @@ namespace sauceDemo.Tests
             _inventoryPage = new InventoryPage(_page);
         }
 
-        /// <summary>
-        /// Sort Products test
-        /// </summary>
         [Test]
-        public void SortProducts_ByLowPrice_SortByLowestPrice()
+        public void SortProducts_ByLowToHighPrice_SortByLowestPrice()
         {
             //Arrange
             var comparer = new ItemComparer();
@@ -47,7 +44,7 @@ namespace sauceDemo.Tests
         }
 
         [Test]
-        public async Task AddItems_FromInventory_ShouldAllItemsAddedToShoppingCart()
+        public async Task AddItems_FromInventory_ShouldAddItemsToShoppingCart()
         {
             //Arrange
             int total = 3;
@@ -62,9 +59,13 @@ namespace sauceDemo.Tests
             }
         }
 
-        ///Option 1 
+        /// <summary>
+        /// Add the specific product ‘Sauce Labs Onesie’ to the shopping cart
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Option 1 by name</remarks>
         [Test]
-        public async Task AddItem_FromInventoryItem_AddItemToShoppingCartAsync()
+        public async Task AddProduct_WithSpecificName_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
             //Act
@@ -81,9 +82,13 @@ namespace sauceDemo.Tests
             cartPage.CheckCartItem(_fixItem);
         }
 
-        ///Option 2
+        /// <summary>
+        /// Add the specific product ‘Sauce Labs Onesie’ to the shopping cart
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Option 2 by name</remarks>
         [Test]
-        public async Task AddItem_FromButtonText_AddItemToShoppingCartAsync()
+        public async Task AddProduct_FromButtonText_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
             //Act
