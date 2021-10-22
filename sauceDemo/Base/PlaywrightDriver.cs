@@ -7,6 +7,7 @@ namespace sauceDemo.Base
     public class PlaywrightDriver
     {
         public IPage Page { get; set; }
+        public IBrowserContext Context { get; set; }
 
         public async Task<IPage> InitalizePlaywright()
         {
@@ -28,7 +29,8 @@ namespace sauceDemo.Base
                 default:
                     browser = await playwright.Chromium.LaunchAsync(launchOptions);
                     break;
-            }           
+            }
+            Context = await browser.NewContextAsync();
             Page = await browser.NewPageAsync();
             return Page;
         }

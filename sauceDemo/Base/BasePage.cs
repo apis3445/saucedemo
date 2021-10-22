@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace sauceDemo
 {
@@ -56,7 +55,6 @@ namespace sauceDemo
             File.WriteAllBytes(screenImage,imageBytes);
             TestContext.AddTestAttachment(screenImage);  
         }
-
     
         /// <summary>
         /// Click in the hamburger menu

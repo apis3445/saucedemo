@@ -11,10 +11,10 @@ Install Playwright for C#
   dotnet tool install --global Microsoft.Playwright.CLI 
 ```
  
- 2. Install Playwright (this includes the browsers Chromium, Firefox, Webkit). Execute this command inside the project path. Sample path c:\Projects\SsauceDemo
+ 2. Install Playwright (this includes the browsers Chromium, Firefox, Webkit). Execute this command inside the project path. Sample path c:\Projects\sauceDemo
  ```console
    playwright install
-```
+ ```
 
 ## Run tests
 
@@ -59,6 +59,31 @@ With NUnit you can integrate with Report Portal
 
 https://reportportal.io/
 
+### Test Generator
+
+To generate a new test
+
+ ```console
+    playwright codegen https://www.saucedemo.com/
+```
+
+To emulate an IPhone
+
+ ```console
+    playwright codegen --device="iPhone 11" wikipedia.org
+```
+
+### Tracing
+
+The test case: Login_WithValidUser_NavigatesToProductsPageAsync includes a tracing sample
+
+This option generates a .zip with more details about the test
+
+More info
+
+https://playwright.dev/dotnet/docs/trace-viewer
+
+
 ### Add new test
 
 As a best practice you can add a custom snippet to Visual Studio (windows) to generate the
@@ -78,6 +103,7 @@ Copy the filess to
 
 After you can write "uat" from VS and press tab to get a template for async test
 
+```cs
 [TestMethod]
 public async Task UoW_InitialCondition_ExpectedResult()
 {
@@ -88,9 +114,11 @@ public async Task UoW_InitialCondition_ExpectedResult()
     //Assert
     
  }
+```
 
 Or write "ut" for sync test case
 
+```cs
 [TestMethod]
 public void UoW_InitialCondition_ExpectedResult()
 {
@@ -103,3 +131,4 @@ public void UoW_InitialCondition_ExpectedResult()
 	//Assert
 
 }]
+```

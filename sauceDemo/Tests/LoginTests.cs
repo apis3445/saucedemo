@@ -13,11 +13,13 @@ namespace sauceDemo.Tests
         private string _baseAddress = Initialize.BaseAddress;
         private IPage _page;
         private LoginPage _loginPage;
+        private IBrowserContext _context;
 
         [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
+            _context = playwrightDriver.Context;
             _page = await playwrightDriver.InitalizePlaywright();
             _loginPage = new LoginPage(_page);
             await _loginPage.Goto();
@@ -28,10 +30,25 @@ namespace sauceDemo.Tests
         public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
         {
             //Arrange
+            // Sample for tracing
+            await _context.Tracing.StartAsync(new TracingStartOptions
+            {
+                Screenshots = true,
+                Snapshots = true
+            });
             //Act
             await _loginPage.LoginAsync(user, password);
             //Assert
             Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url);
+            string tracePath = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, "trace.zip");
+            // Stop tracing and export it into a zip archive.
+            await _context.Tracing.StopAsync(new TracingStopOptions
+            {
+                Path = tracePath
+            }) ;
+            TestContext.AddTestAttachment(tracePath);
+            //To open the tracing
+            //playwright show-trace trace.zip
         }
 
         [Test]

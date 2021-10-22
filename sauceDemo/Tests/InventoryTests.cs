@@ -14,17 +14,16 @@ namespace sauceDemo.Tests
         private LoginPage _loginPage;
         private InventoryPage _inventoryPage;
         private string _fixItem = "Sauce Labs Onesie";
+        
 
         [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
             _page = await playwrightDriver.InitalizePlaywright();
-
             _loginPage = new LoginPage(_page);
             await _loginPage.Goto();
-            await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
-            
+            await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);            
             _inventoryPage = new InventoryPage(_page);
         }
 
