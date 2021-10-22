@@ -82,7 +82,13 @@ This option generates a .zip with more details about the test
 More info
 
 https://playwright.dev/dotnet/docs/trace-viewer
+https://applitools.com/event/playwright-four-futuristic-features/
 
+To check the trace
+
+```console
+    playwright show-trace trace.zip
+```
 
 ### Add new test
 

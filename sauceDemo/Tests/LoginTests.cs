@@ -19,8 +19,8 @@ namespace sauceDemo.Tests
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-            _context = playwrightDriver.Context;
             _page = await playwrightDriver.InitalizePlaywright();
+            _context = playwrightDriver.Context;
             _loginPage = new LoginPage(_page);
             await _loginPage.Goto();
         }

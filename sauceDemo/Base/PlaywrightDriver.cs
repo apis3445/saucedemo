@@ -31,7 +31,7 @@ namespace sauceDemo.Base
                     break;
             }
             Context = await browser.NewContextAsync();
-            Page = await browser.NewPageAsync();
+            Page = await Context.NewPageAsync();
             return Page;
         }
     }

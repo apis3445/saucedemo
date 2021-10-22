@@ -9,12 +9,12 @@ namespace sauceDemo
     {
 
         public static IPage Page;
-        public static string BaseAddress;
+        public static string BaseAddress = "https://www.saucedemo.com/";
 
         [OneTimeSetUp]
         public static void  Setup()
         {
-           BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
+           // BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
         }
 
         [OneTimeTearDown]
