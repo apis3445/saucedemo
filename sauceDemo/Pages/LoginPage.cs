@@ -19,7 +19,7 @@ namespace sauceDemo.Pages
         /// Go to Login page
         /// </summary>
         /// <returns></returns>
-        public async Task Goto() => await Page.GotoAsync(Initialize.BaseAddress);
+        public async Task GotoAsync() => await Page.GotoAsync(Initialize.BaseAddress);
 
         /// <summary>
         /// Set the user to login

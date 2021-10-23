@@ -11,6 +11,14 @@ namespace sauceDemo.Base
 
         public async Task<IPage> InitalizePlaywright()
         {
+            var browser = await InitBrowserAsync();
+            Context = await browser.NewContextAsync();
+            Page = await Context.NewPageAsync();
+            return Page;
+        }
+
+        private async Task<IBrowser> InitBrowserAsync()
+        {
             var playwright = await Playwright.CreateAsync();
             string browserType = Environment.GetEnvironmentVariable(Constants.BROWSER_TYPE);
             BrowserTypeLaunchOptions launchOptions = new BrowserTypeLaunchOptions { Headless = false };
@@ -30,9 +38,22 @@ namespace sauceDemo.Base
                     browser = await playwright.Chromium.LaunchAsync(launchOptions);
                     break;
             }
+            return browser;
+        }
+
+        public async Task<IPage> InitalizePlaywrightTracing()
+        {
+            var browser = await InitBrowserAsync();
             Context = await browser.NewContextAsync();
+            // Sample for tracing
+            await Context.Tracing.StartAsync(new TracingStartOptions
+            {
+                Screenshots = true,
+                Snapshots = true
+            });
             Page = await Context.NewPageAsync();
             return Page;
         }
+       
     }
 }

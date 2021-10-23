@@ -22,7 +22,7 @@ namespace sauceDemo.Tests
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
             _page = await playwrightDriver.InitalizePlaywright();
             _loginPage = new LoginPage(_page);
-            await _loginPage.Goto();
+            await _loginPage.GotoAsync();
             await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);            
             _inventoryPage = new InventoryPage(_page);
         }
