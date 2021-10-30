@@ -19,6 +19,8 @@ Install Playwright for C#
 ## Run tests
 
 You can run the test from Windows, MacOS or with Azure Devops Pipeline
+![image](https://user-images.githubusercontent.com/7475390/139554833-a91faf4d-7419-4f4e-88e4-ed8ef6646a5d.png)
+
 
 ### Visual Studio (Windows)
 
