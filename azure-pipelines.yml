@@ -7,6 +7,13 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+schedules:
+- cron: "0 0,6,12,18 * * 1-5"
+  displayName: Run each 6 horus
+  always: true
+  branches:
+    include:
+    - master
 steps:
 - task: UseDotNet@2
   inputs:
