@@ -85,13 +85,35 @@ namespace sauceDemo.Tests
         /// Add the specific product ‘Sauce Labs Onesie’ to the shopping cart
         /// </summary>
         /// <returns></returns>
-        /// <remarks>Option 2 by name</remarks>
+        /// <remarks>Option 2 by DataTest</remarks>
         [Test]
         public async Task AddProduct_FromButtonText_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
             //Act
             await _inventoryPage.AddToCartByDataTestNameAsync(_fixItem);
+            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            //Assert
+            CartPage cartPage = new CartPage(_page);
+            cartPage.CheckItemsInCart(1);
+            cartPage.CheckCartItem(_fixItem);
+        }
+
+        /// <summary>
+        /// Add the specific product ‘Sauce Labs Onesie’ to the shopping cart
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Option 3 by url</remarks>
+        [Test]
+        public async Task AddProduct_FromUrl_ShouldAddProductToShoppingCartAsync()
+        {
+            //Arrange
+            InventoryItemPage inventoryItemPage = new InventoryItemPage(_page);
+            int itemId = 2; //Sauce Labs Onesie has id = 2
+            //Go to the page of the product with direct link
+            await inventoryItemPage.GotoAsync(itemId);
+            //Act
+            await inventoryItemPage.ClickAddToCartAsync();
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             //Assert
             CartPage cartPage = new CartPage(_page);

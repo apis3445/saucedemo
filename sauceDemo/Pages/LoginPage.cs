@@ -48,7 +48,7 @@ namespace sauceDemo.Pages
         /// Click in login button
         /// </summary>
         /// <returns></returns>
-        public async Task ClickLogin()
+        public async Task ClickLoginAsync()
         {
             await Page.ClickAsync(_loginButtonLocator);
             await TakeScreenShootAsync("LoginClick");
@@ -70,7 +70,7 @@ namespace sauceDemo.Pages
         {
             await SetUserAsync(user);
             await SetPasswordAsync(password);
-            await ClickLogin();
+            await ClickLoginAsync();
         }
     }
 }

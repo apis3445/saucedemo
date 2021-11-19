@@ -14,7 +14,7 @@ namespace sauceDemo
         [OneTimeSetUp]
         public static void  Setup()
         {
-           BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS);
+           BaseAddress = Environment.GetEnvironmentVariable(Constants.BASE_ADDRESS) ?? "https://www.saucedemo.com/";
         }
 
         [OneTimeTearDown]

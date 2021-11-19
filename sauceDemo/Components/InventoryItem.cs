@@ -6,6 +6,7 @@ namespace sauceDemo.Components
     {
         private string _image;
 
+
         public InventoryItem(IElementHandle element, string type): base(element, type)
         {
             _image = $"img.inventory_{type}_img";
