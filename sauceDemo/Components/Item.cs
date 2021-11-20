@@ -18,7 +18,7 @@ namespace sauceDemo.Components
             _name = $"div.inventory_{type}_name";
             _description = $"div.inventory_{type}_desc";
             _price = $"div.inventory_{type}_price";
-            _button = "button[data-test^=add-to-cart]";
+            _button = "button.btn_inventory";
         }
 
         /// <summary>

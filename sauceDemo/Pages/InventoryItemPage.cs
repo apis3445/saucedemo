@@ -6,14 +6,13 @@ namespace sauceDemo.Pages
 {
     public class InventoryItemPage : BasePage
     {
-        private string addToCartButtonLocator = "button[data-test^=add-to-cart]";
         public InventoryItemPage(IPage page) : base(page)
         {
         }
 
         public async Task ClickAddToCartAsync()
         {
-            await Page.ClickAsync(addToCartButtonLocator);
+            await Item.ClickButtonAsync();
             await TakeScreenShootAsync("AddToCartInventory");
         }
 
