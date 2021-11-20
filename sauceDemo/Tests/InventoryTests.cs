@@ -113,7 +113,7 @@ namespace sauceDemo.Tests
             //Go to the page of the product with direct link
             await inventoryItemPage.GotoAsync(itemId);
             //Act
-            await inventoryItemPage.ClickAddToCartAsync();
+            await inventoryItemPage.Item.ClickButtonAsync();
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             //Assert
             CartPage cartPage = new CartPage(_page);

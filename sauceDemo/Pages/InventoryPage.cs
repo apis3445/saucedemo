@@ -46,7 +46,7 @@ namespace sauceDemo.Pages
         /// <summary>
         /// Add item t cart by item name
         /// </summary>
-        /// <param name="itemName">Name of the item to add to the ccart</param>
+        /// <param name="itemName">Name of the item to add to the cart</param>
         /// <returns></returns>
         public async Task AddToCartByNameAsync(string itemName)
         {
