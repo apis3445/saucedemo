@@ -10,13 +10,8 @@ namespace sauceDemo.Pages
         {
         }
 
-        public async Task ClickAddToCartAsync()
-        {
-            await Item.ClickButtonAsync();
-            await TakeScreenShootAsync("AddToCartInventory");
-        }
-
         public async Task GotoAsync(int id) => await Page.GotoAsync(Initialize.BaseAddress + "inventory-item.html?id="+id);
+
         /// <summary>
         /// Item
         /// </summary>

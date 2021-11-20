@@ -20,6 +20,14 @@ Install Playwright for C#
 
 You can run the test from Windows, MacOS or with Azure Devops Pipeline
 
+You can run with different browsers
+
+```console
+    dotnet test -s chromium.runsettings
+    dotnet test -s webkit.runsettings
+    dotnet test -s firefox.runsettings
+```
+
 ### Visual Studio (Windows)
 
 1. Select the .runsettings 
@@ -64,7 +72,7 @@ https://reportportal.io/
 
 To generate a new test
 
- ```console
+```console
     playwright codegen https://www.saucedemo.com/
 ```
 
