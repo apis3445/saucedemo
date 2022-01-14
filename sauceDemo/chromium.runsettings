@@ -8,4 +8,7 @@
       <BROWSER_TYPE>Chromium</BROWSER_TYPE>
     </EnvironmentVariables>
   </RunConfiguration>
+  <NUnit>
+    <NumberOfTestWorkers>24</NumberOfTestWorkers>
+  </NUnit>
 </RunSettings>

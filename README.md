@@ -28,6 +28,13 @@ You can run with different browsers
     dotnet test -s firefox.runsettings
 ```
 
+For run only some test, for example run the test that contains AddItems in the name
+
+```console
+    dotnet test --filter "Name~AddItems"
+```
+For get the list of filter: https://docs.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests?pivots=nunit
+
 ### Visual Studio (Windows)
 
 1. Select the .runsettings 
