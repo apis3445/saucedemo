@@ -23,7 +23,7 @@ namespace sauceDemo.Tests
             _inventoryPage = new InventoryPage(_page);
         }
 
-        [Test]
+        [Test, Category("Shop")]
         public async Task AddItemsToShop_CompletePurchsse_ShouldShowsConfirmationPageAsync()
         {
             //Arrange

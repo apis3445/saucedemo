@@ -27,7 +27,7 @@ namespace sauceDemo.Tests
             _inventoryPage = new InventoryPage(_page);
         }
 
-        [Test]
+        [Test, Category("Inventory")]
         public void SortProducts_ByLowToHighPrice_SortByLowestPrice()
         {
             //Arrange
@@ -42,7 +42,7 @@ namespace sauceDemo.Tests
             Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer));
         }
 
-        [Test]
+        [Test, Category("Inventory")]
         public async Task AddItems_FromInventory_ShouldAddItemsToShoppingCart()
         {
             //Arrange
@@ -63,7 +63,7 @@ namespace sauceDemo.Tests
         /// </summary>
         /// <returns></returns>
         /// <remarks>Option 1 by name</remarks>
-        [Test]
+        [Test, Category("Inventory")]
         public async Task AddProduct_WithSpecificName_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
@@ -86,7 +86,7 @@ namespace sauceDemo.Tests
         /// </summary>
         /// <returns></returns>
         /// <remarks>Option 2 by DataTest</remarks>
-        [Test]
+        [Test, Category("Inventory")]
         public async Task AddProduct_FromButtonText_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
