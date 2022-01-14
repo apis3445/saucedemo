@@ -6,6 +6,7 @@ using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
+    [Parallelizable]
     public class LoginTests
     {
         private const string _genericPassword = "secret_sauce";
@@ -25,7 +26,7 @@ namespace sauceDemo.Tests
             await _loginPage.GotoAsync();
         }
 
-        [Test, Category("Login")]
+        [Test,  Category("Login")]
         [TestCase(_standardUser, _genericPassword)]
         public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
         {
@@ -38,7 +39,7 @@ namespace sauceDemo.Tests
            
         }
 
-        [Test, Category("Login")]
+        [Test,  Category("Login")]
         public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
         {
             //Arrange
@@ -49,7 +50,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
         }
 
-        [Test, Category("Login")]
+        [Test,  Category("Login")]
         public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
         {
             //Arrange
@@ -62,7 +63,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync());
         }
 
-        [Test, Category("Login")]
+        [Test,  Category("Login")]
         public async Task Logout_FromHomePage_RedirectToLogin()
         {
             //Arrange

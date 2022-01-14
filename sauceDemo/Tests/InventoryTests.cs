@@ -7,7 +7,7 @@ using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
-    
+    [Parallelizable]
     public class InventoryTests
     {
         private IPage _page;
@@ -104,7 +104,7 @@ namespace sauceDemo.Tests
         /// </summary>
         /// <returns></returns>
         /// <remarks>Option 3 by url</remarks>
-        [Test]
+        [Test, Category("Inventory")]
         public async Task AddProduct_FromUrl_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange

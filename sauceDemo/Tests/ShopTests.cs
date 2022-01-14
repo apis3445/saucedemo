@@ -6,6 +6,7 @@ using sauceDemo.Pages;
 
 namespace sauceDemo.Tests
 {
+    [Parallelizable]
     public class ShopTests
     {
         private IPage _page;
