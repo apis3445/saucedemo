@@ -22,23 +22,13 @@ namespace sauceDemo.Base
             var playwright = await Playwright.CreateAsync();
             string browserType = Environment.GetEnvironmentVariable(Constants.BROWSER_TYPE);
             BrowserTypeLaunchOptions launchOptions = new BrowserTypeLaunchOptions { Headless = false };
-            IBrowser browser;
-            switch (browserType)
+            return browserType switch
             {
-                case "Chromium":
-                    browser = await playwright.Chromium.LaunchAsync(launchOptions);
-                    break;
-                case "Firefox":
-                    browser = await playwright.Firefox.LaunchAsync(launchOptions);
-                    break;
-                case "Webkit":
-                    browser = await playwright.Webkit.LaunchAsync(launchOptions);
-                    break;
-                default:
-                    browser = await playwright.Chromium.LaunchAsync(launchOptions);
-                    break;
-            }
-            return browser;
+                "Chromium" => await playwright.Chromium.LaunchAsync(launchOptions),
+                "Firefox" => await playwright.Firefox.LaunchAsync(launchOptions),
+                "Webkit" => await playwright.Webkit.LaunchAsync(launchOptions),
+                _ => await playwright.Chromium.LaunchAsync(launchOptions)
+            };
         }
 
         public async Task<IPage> InitalizePlaywrightTracing()
