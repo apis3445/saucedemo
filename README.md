@@ -64,6 +64,15 @@ and BASE_ADDRESS to test with different URLs
 You can check the reports in Azure Devops
 ![image](https://user-images.githubusercontent.com/7475390/139554833-a91faf4d-7419-4f4e-88e4-ed8ef6646a5d.png)
 
+## Run tests in parallel
+
+For run test in parallel you need to add the attribute [Parallelizable] to the Test class
+
+You can setup the number or workers
+
+```console
+    dotnet test -- NUnit.NumberOfTestWorkers=2
+```
 ### Reports
 
 For additional reports to Azure Devops
