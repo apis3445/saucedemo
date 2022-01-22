@@ -34,12 +34,12 @@ namespace sauceDemo.Tests
             CartPage cartPage = new CartPage(_page);
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             await cartPage.ClickCheckoutAsync();
-            CheckoutStep1 checkoutStep1 = new CheckoutStep1(_page);
+            CheckoutStep1Page checkoutStep1 = new CheckoutStep1Page(_page);
             await checkoutStep1.SetFirstNameAsync("Abigail");
             await checkoutStep1.SetLastNameAsync("Armijo");
             await checkoutStep1.SetPostalCodeAsync("27140");
             await checkoutStep1.ClickContinueAsync();
-            CheckoutStep2 checkoutStep2 = new CheckoutStep2(_page);
+            CheckoutStep2Page checkoutStep2 = new CheckoutStep2Page(_page);
             //Assert
             Assert.AreEqual(total, checkoutStep2.ItemsInShoppingCart);
             for (int i = 0; i < total; i++)
@@ -48,7 +48,7 @@ namespace sauceDemo.Tests
             }
             await checkoutStep2.CickFinishAsync();
             //Additional assert to check complete
-            CheckoutComplete checkoutComplete = new CheckoutComplete(_page);
+            CheckoutCompletePage checkoutComplete = new CheckoutCompletePage(_page);
             Assert.AreEqual("THANK YOU FOR YOUR ORDER", checkoutComplete.Thanks);
         }
     }

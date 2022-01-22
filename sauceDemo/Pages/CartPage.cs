@@ -8,13 +8,13 @@ namespace sauceDemo.Pages
 {
     public class CartPage : BasePage
     {
-        //Added data-test in private to reuse to click or get test if is needed check some
-        //translations in the future.
-        private string _continueShoppingButtonLocator = "data-test=continue-shopping";
-        private string _checkoutButtonLocator = "data-test=checkout";
-        
+        private ILocator _checkoutButton;
+        private ILocator _continueShoppingButton;
+
         public CartPage(IPage page) : base(page)
         {
+            _checkoutButton = page.Locator("data-test=checkout");
+            _continueShoppingButton = page.Locator("data-test=continue-shopping");
         }
 
         /// <summary>
@@ -24,21 +24,15 @@ namespace sauceDemo.Pages
         {
             get
             {
-                var listCartItems = new List<CartItem>();
-                var inventoryItems = Page.QuerySelectorAllAsync("div.cart_item").Result;
-                foreach (var item in inventoryItems)
-                {
-                    CartItem cartItem = new CartItem(item, "item");
-                    listCartItems.Add(cartItem);
-                }
-                return listCartItems;
+                var listCartItems = new CartItems(this.Page);
+                return listCartItems.Items;
             }
         }
 
         //Async due to the framework is async
         public async Task ClickCheckoutAsync()
         {
-            await Page.ClickAsync(_checkoutButtonLocator);
+            await _checkoutButton.ClickAsync();
             //Added screenshot maybe check environment variabl to save in local development or connect
             //to third party report tool like report portal
            await TakeScreenShootAsync("Checkout");
@@ -51,7 +45,7 @@ namespace sauceDemo.Pages
         /// <returns></returns>
         public async Task ClickContinueShoppingAsync()
         {
-            await Page.ClickAsync(_continueShoppingButtonLocator);
+            await _continueShoppingButton.ClickAsync();
             await TakeScreenShootAsync("ContinueShopping");
         }
 

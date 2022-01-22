@@ -6,32 +6,26 @@ using sauceDemo.Components;
 
 namespace sauceDemo.Pages
 {
-    public class CheckoutStep2 : BasePage
+    public class CheckoutStep2Page : BasePage
     {
         //TODO: Add summary info items
 
-        private string _finishButtonLocator = "data-test=finish";
+        private ILocator _finishButton;
 
-        public CheckoutStep2(IPage page) : base(page)
+        public CheckoutStep2Page(IPage page) : base(page)
         {
+            _finishButton = page.Locator("data-test=finish");
         }
 
-
         /// <summary>
-        /// Items
+        /// Cart Items
         /// </summary>
         public List<CartItem> Items
         {
             get
             {
-                var listCartItems = new List<CartItem>();
-                var inventoryItems = Page.QuerySelectorAllAsync("div.cart_item").Result;
-                foreach (var item in inventoryItems)
-                {
-                    CartItem cartItem = new CartItem(item, "item");
-                    listCartItems.Add(cartItem);
-                }
-                return listCartItems;
+                var listCartItems = new CartItems(this.Page);
+                return listCartItems.Items;
             }
         }
 
@@ -52,7 +46,7 @@ namespace sauceDemo.Pages
         /// <returns></returns>
         public async Task CickFinishAsync()
         {
-            await Page.ClickAsync(_finishButtonLocator);
+            await _finishButton.ClickAsync();
             await TakeScreenShootAsync("finishClick");
         }
     }

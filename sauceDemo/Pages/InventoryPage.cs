@@ -7,13 +7,13 @@ namespace sauceDemo.Pages
 {
     public class InventoryPage : BasePage
     {
-        private string _comboSortLocator = "data-test=product_sort_container";
+        private ILocator _comboSort;
 
         public List<string> ItemsName = new List<string>();
 
         public InventoryPage(IPage page) : base(page)
         {
-
+            _comboSort = page.Locator("data-test=product_sort_container");
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace sauceDemo.Pages
         /// <param name="value">Value/Text to sort the items</param>
         public void SetSort(string value)
         {
-            Page.SelectOptionAsync(_comboSortLocator, value);
+            _comboSort.SelectOptionAsync(value);
         }
 
         /// <summary>

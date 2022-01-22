@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
 
 namespace sauceDemo.Pages
 {
-    public class CheckoutStep1 : BasePage
+    public class CheckoutStep1Page : BasePage
     {
         private string _firstNameInputLocator = "input[data-test='firstName']";
         private string _lastNameInputLocator = "input[data-test='lastName']";
@@ -15,7 +14,7 @@ namespace sauceDemo.Pages
         public string LastName => Page.TextContentAsync(_lastNameInputLocator).Result;
         public string PostalCode => Page.TextContentAsync(_postalCodeInputLocator).Result;
 
-        public CheckoutStep1(IPage page) : base(page)
+        public CheckoutStep1Page(IPage page) : base(page)
         {
         }
 

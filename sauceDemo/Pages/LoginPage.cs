@@ -5,14 +5,17 @@ namespace sauceDemo.Pages
 {
     public class LoginPage : BasePage
     {
-        private string _userNameInputLocator = "input[data-test='username']";
-        private string _passwordInputLocator = "input[data-test='password']";
-        private string _loginButtonLocator = "input[data-test='login-button']";
-        private string _errorMessageLocator = "data-test=error";
+        private ILocator _userNameInput;
+        private ILocator _passwordInput;
+        private ILocator _loginButton;
+        private ILocator _errorMessage;
         
         public LoginPage(IPage page) : base(page)
         {
-            
+            _userNameInput = page.Locator("input[data-test='username']");
+            _passwordInput = page.Locator("input[data-test='password']");
+            _loginButton = page.Locator("input[data-test='login-button']");
+            _errorMessage = page.Locator("data-test=error");
         }
 
         /// <summary>
@@ -26,14 +29,14 @@ namespace sauceDemo.Pages
         /// </summary>
         /// <param name="user">User to login.</param>
         /// <returns></returns>
-        public async Task SetUserAsync(string user) => await Page.TypeAsync(_userNameInputLocator, user);
+        public async Task SetUserAsync(string user) => await _userNameInput.TypeAsync(user);
 
         /// <summary>
         /// Set password to login
         /// </summary>
         /// <param name="password">User password</param>
         /// <returns></returns>
-        public async Task SetPasswordAsync(string password) => await Page.TypeAsync(_passwordInputLocator, password);
+        public async Task SetPasswordAsync(string password) => await _passwordInput.TypeAsync(password);
 
         /// <summary>
         /// Get error messsage
@@ -41,7 +44,7 @@ namespace sauceDemo.Pages
         /// <returns></returns>
         public async Task<string> GetErrorAsync()
         {
-            return await Page.QuerySelectorAsync(_errorMessageLocator).Result.TextContentAsync();
+            return await _errorMessage.TextContentAsync();
         }
 
         /// <summary>
@@ -50,7 +53,7 @@ namespace sauceDemo.Pages
         /// <returns></returns>
         public async Task ClickLoginAsync()
         {
-            await Page.ClickAsync(_loginButtonLocator);
+            await _loginButton.ClickAsync();
             await TakeScreenShootAsync("LoginClick");
         }
 
@@ -58,7 +61,7 @@ namespace sauceDemo.Pages
         /// Returns true if the page has an error messsage
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> HasError() =>  await Page.IsVisibleAsync(_errorMessageLocator);
+        public async Task<bool> HasError() =>  await _errorMessage.IsVisibleAsync();
 
         /// <summary>
         /// Login with the user and password
