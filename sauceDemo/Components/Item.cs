@@ -10,7 +10,7 @@ namespace sauceDemo.Components
         private string _name;
         private string _description;
         private string _price;
-        private string _button;
+        private string _cartButton;
 
         public Item(IElementHandle element, string type)
         {
@@ -18,7 +18,7 @@ namespace sauceDemo.Components
             _name = $"div.inventory_{type}_name";
             _description = $"div.inventory_{type}_desc";
             _price = $"div.inventory_{type}_price";
-            _button = "button.btn_inventory";
+            _cartButton = "button.btn_inventory";
         }
 
         /// <summary>
@@ -44,11 +44,15 @@ namespace sauceDemo.Components
         /// <summary>
         /// Button for the item
         /// </summary>
-        public IElementHandle Button => element.QuerySelectorAsync(_button).Result;
+        public IElementHandle CartButton => element.QuerySelectorAsync(_cartButton).Result;
 
+        /// <summary>
+        /// Clic
+        /// </summary>
+        /// <returns></returns>
         public async Task ClickButtonAsync()
         {
-            await Button.ClickAsync();
+            await CartButton.ClickAsync();
         }
 
     }

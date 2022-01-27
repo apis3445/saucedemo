@@ -38,7 +38,6 @@ namespace sauceDemo.Pages
            await TakeScreenShootAsync("Checkout");
         }
 
-
         /// <summary>
         /// Click in continue shopping
         /// </summary>

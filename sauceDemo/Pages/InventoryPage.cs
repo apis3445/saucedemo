@@ -73,7 +73,7 @@ namespace sauceDemo.Pages
         {
             for (int i = 0; i < total; i++)
             {
-                await Items[i].Button.ClickAsync();
+                await Items[i].CartButton.ClickAsync();
                 ItemsName.Add(Items[i].Name);
             }
         }

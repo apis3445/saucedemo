@@ -7,11 +7,18 @@ namespace sauceDemo.Components
     {
         private IPage _page;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="page">Page to access elements</param>
         public CartItems(IPage page)
         {
             this._page = page;
         }
 
+        /// <summary>
+        /// Get Cart Items
+        /// </summary>
         public List<CartItem> Items
         {
             get

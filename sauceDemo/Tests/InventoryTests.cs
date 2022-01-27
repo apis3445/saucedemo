@@ -74,7 +74,7 @@ namespace sauceDemo.Tests
             var name = inventoryItemPage.Item.Name;
             //Assert
             Assert.AreEqual(_fixItem, name);
-            Assert.AreEqual("Remove", await inventoryItemPage.Item.Button.TextContentAsync());
+            Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync());
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
