@@ -28,18 +28,17 @@ namespace sauceDemo.Tests
         }
 
         [Test, Category("Inventory")]
-        public void SortProducts_ByLowToHighPrice_SortByLowestPrice()
+        public async Task SortProducts_ByLowToHighPrice_SortByLowestPriceAsync()
         {
             //Arrange
             var comparer = new ItemComparer();
             var items = _inventoryPage.Items;
             var itemsByPriceDes = items.OrderBy(i => i.Price).ToList(); 
             //Act
-            _inventoryPage.SetSort("lohi");
-            _ = _page.WaitForSelectorAsync("div.inventory_list").Result;
+            await _inventoryPage.SetSortAsync("lohi");
             items = _inventoryPage.Items;
             //Assert
-            Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer));
+            Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer),"Items are not sorted by price low to hi");
         }
 
         [Test, Category("Inventory")]
@@ -70,10 +69,10 @@ namespace sauceDemo.Tests
             //Act
             await _inventoryPage.AddToCartByNameAsync(_fixItem);
             InventoryItemPage inventoryItemPage = new InventoryItemPage(_page);
-            await inventoryItemPage.Item.ClickButtonAsync();
+            await inventoryItemPage.Item.ClickCartButtonAsync();
             var name = inventoryItemPage.Item.Name;
             //Assert
-            Assert.AreEqual(_fixItem, name);
+            Assert.AreEqual(_fixItem, name, "Item in cart is different");
             Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync());
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             CartPage cartPage = new CartPage(_page);
@@ -113,7 +112,7 @@ namespace sauceDemo.Tests
             //Go to the page of the product with direct link
             await inventoryItemPage.GotoAsync(itemId);
             //Act
-            await inventoryItemPage.Item.ClickButtonAsync();
+            await inventoryItemPage.Item.ClickCartButtonAsync();
             await _inventoryPage.ShopingCartIcon.ClickAsync();
             //Assert
             CartPage cartPage = new CartPage(_page);

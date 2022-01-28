@@ -50,7 +50,7 @@ namespace sauceDemo.Components
         /// Clic
         /// </summary>
         /// <returns></returns>
-        public async Task ClickButtonAsync()
+        public async Task ClickCartButtonAsync()
         {
             await CartButton.ClickAsync();
         }

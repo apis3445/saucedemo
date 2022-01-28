@@ -38,9 +38,11 @@ namespace sauceDemo.Pages
         /// Sort items by the value
         /// </summary>
         /// <param name="value">Value/Text to sort the items</param>
-        public void SetSort(string value)
+        public async Task SetSortAsync(string value)
         {
-            _comboSort.SelectOptionAsync(value);
+            await _comboSort.SelectOptionAsync(value);
+            //wait to reload the list of products
+            _ = await Page.WaitForSelectorAsync("div.inventory_list");
         }
 
         /// <summary>
