@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
@@ -34,7 +33,7 @@ namespace sauceDemo.Tests
             int total = 3;
             await inventoryPage.AddItemsAsync(total);
             //Assert
-            CartPage cartPage = new CartPage(pge);
+            CartPage cartPage = new CartPage(page);
             cartPage.CheckItemsInCart(total);
             await inventoryPage.ClickShoppingCartBadgeAsync();
             for (int i = 0; i < total; i++)
@@ -54,14 +53,14 @@ namespace sauceDemo.Tests
             //Arrange
             //Act
             await inventoryPage.AddToCartByNameAsync(_fixItem);
-            InventoryItemPage inventoryItemPage = new InventoryItemPage(pge);
+            InventoryItemPage inventoryItemPage = new InventoryItemPage(page);
             await inventoryItemPage.Item.ClickCartButtonAsync();
             var name = inventoryItemPage.Item.Name;
             //Assert
             Assert.AreEqual(_fixItem, name, "Item name in cart is different");
             Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync(), "Cart button doesn't show Remove text");
             await inventoryPage.ClickShoppingCartBadgeAsync();
-            CartPage cartPage = new CartPage(pge);
+            CartPage cartPage = new CartPage(page);
             cartPage.CheckItemsInCart(1);
             cartPage.CartItems.CheckCartItem(_fixItem);
         }
@@ -79,7 +78,7 @@ namespace sauceDemo.Tests
             await inventoryPage.AddToCartByDataTestNameAsync(_fixItem);
             await inventoryPage.ClickShoppingCartBadgeAsync();
             //Assert
-            CartPage cartPage = new CartPage(pge);
+            CartPage cartPage = new CartPage(page);
             cartPage.CheckItemsInCart(1);
             cartPage.CartItems.CheckCartItem(_fixItem);
         }
@@ -93,7 +92,7 @@ namespace sauceDemo.Tests
         public async Task AddProduct_FromUrl_ShouldAddProductToShoppingCartAsync()
         {
             //Arrange
-            InventoryItemPage inventoryItemPage = new InventoryItemPage(pge);
+            InventoryItemPage inventoryItemPage = new InventoryItemPage(page);
             int itemId = 2; //Sauce Labs Onesie has id = 2
             //Go to the page of the product with direct link
             await inventoryItemPage.GotoAsync(itemId);
@@ -101,7 +100,7 @@ namespace sauceDemo.Tests
             await inventoryItemPage.Item.ClickCartButtonAsync();
             await inventoryPage.ClickShoppingCartBadgeAsync();
             //Assert
-            CartPage cartPage = new CartPage(pge);
+            CartPage cartPage = new CartPage(page);
             cartPage.CheckItemsInCart(1);
             cartPage.CartItems.CheckCartItem(_fixItem);
         }

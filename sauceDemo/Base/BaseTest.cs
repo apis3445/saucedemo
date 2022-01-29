@@ -8,18 +8,18 @@ namespace sauceDemo.Base
 {
     public class BaseTest
     {
-        protected IPage pge;
+        protected IPage page;
         protected InventoryPage inventoryPage;
 
         [SetUp]
         public async Task Setup()
         {
             PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-            pge = await playwrightDriver.InitalizePlaywright();
-            var _loginPage = new LoginPage(pge);
-            await _loginPage.GotoAsync();
-            await _loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
-            inventoryPage = new InventoryPage(pge);
+            page = await playwrightDriver.InitalizePlaywright();
+            var loginPage = new LoginPage(page);
+            await loginPage.GotoAsync();
+            await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
+            inventoryPage = new InventoryPage(page);
         }
     }
 }
