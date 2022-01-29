@@ -9,12 +9,12 @@ namespace sauceDemo.Pages
     {
        
         private ILocator _finishButton;
-        public CartItems CartItems;
+        public CartItems ListCartItems;
 
         public CheckoutStep2Page(IPage page) : base(page)
         {
             _finishButton = page.Locator("data-test=finish");
-            CartItems = new CartItems(this.Page);
+            ListCartItems = new CartItems(this.Page);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace sauceDemo.Pages
         {
             get
             {
-                return CartItems.Items;
+                return ListCartItems.Items;
             }
         }
 

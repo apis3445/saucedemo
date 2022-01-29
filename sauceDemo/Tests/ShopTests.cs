@@ -44,7 +44,7 @@ namespace sauceDemo.Tests
             Assert.AreEqual(totalItems, checkoutStep2.ItemsInShoppingCart, "Items in the cart is different");
             for (int i = 0; i < totalItems; i++)
             {
-                checkoutStep2.CartItems.CheckCartItem(_inventoryPage.ItemsName[i]);
+                checkoutStep2.ListCartItems.CheckCartItem(_inventoryPage.ItemsName[i]);
             }
             await checkoutStep2.CickFinishAsync();
             //Additional assert to check complete
