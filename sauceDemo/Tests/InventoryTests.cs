@@ -50,10 +50,10 @@ namespace sauceDemo.Tests
             //Assert
             CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(total);
-            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            await _inventoryPage.ClickShoppingCartBadgeAsync();
             for (int i = 0; i < total; i++)
             {
-                cartPage.CheckCartItem(_inventoryPage.ItemsName[i]);
+                cartPage.CartItems.CheckCartItem(_inventoryPage.ItemsName[i]);
             }
         }
 
@@ -72,12 +72,12 @@ namespace sauceDemo.Tests
             await inventoryItemPage.Item.ClickCartButtonAsync();
             var name = inventoryItemPage.Item.Name;
             //Assert
-            Assert.AreEqual(_fixItem, name, "Item in cart is different");
-            Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync());
-            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            Assert.AreEqual(_fixItem, name, "Item name in cart is different");
+            Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync(), "Cart button doesn't show Remove text");
+            await _inventoryPage.ClickShoppingCartBadgeAsync();
             CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
-            cartPage.CheckCartItem(_fixItem);
+            cartPage.CartItems.CheckCartItem(_fixItem);
         }
 
         /// <summary>
@@ -91,11 +91,11 @@ namespace sauceDemo.Tests
             //Arrange
             //Act
             await _inventoryPage.AddToCartByDataTestNameAsync(_fixItem);
-            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            await _inventoryPage.ClickShoppingCartBadgeAsync();
             //Assert
             CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
-            cartPage.CheckCartItem(_fixItem);
+            cartPage.CartItems.CheckCartItem(_fixItem);
         }
 
         /// <summary>
@@ -113,11 +113,11 @@ namespace sauceDemo.Tests
             await inventoryItemPage.GotoAsync(itemId);
             //Act
             await inventoryItemPage.Item.ClickCartButtonAsync();
-            await _inventoryPage.ShopingCartIcon.ClickAsync();
+            await _inventoryPage.ClickShoppingCartBadgeAsync();
             //Assert
             CartPage cartPage = new CartPage(_page);
             cartPage.CheckItemsInCart(1);
-            cartPage.CheckCartItem(_fixItem);
+            cartPage.CartItems.CheckCartItem(_fixItem);
         }
     }
 }

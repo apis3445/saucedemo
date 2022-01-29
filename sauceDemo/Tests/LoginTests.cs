@@ -35,7 +35,7 @@ namespace sauceDemo.Tests
             //Act
             await _loginPage.LoginAsync(user, password);
             //Assert
-            Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url);
+            Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url, "Main Page for user is not show");
            
         }
 
@@ -47,7 +47,7 @@ namespace sauceDemo.Tests
             await _loginPage.LoginAsync("invalidUser", _genericPassword);
             //Assert
             Assert.IsTrue(await _loginPage.HasError());
-            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync());
+            Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync(), "Should show username and password error");
         }
 
         [Test,  Category("Login")]
@@ -60,7 +60,7 @@ namespace sauceDemo.Tests
             //To check if the div with error is visible
             Assert.IsTrue(await _loginPage.HasError(), "Error is not visible");
             //Only if you want to check the error messsage not only error div
-            Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync());
+            Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync(), "Should show locked user");
         }
 
         [Test,  Category("Login")]
@@ -72,7 +72,7 @@ namespace sauceDemo.Tests
             //Act
             await inventoryPage.Logout();
             //Assert
-            Assert.AreEqual(_baseAddress, _page.Url);
+            Assert.AreEqual(_baseAddress, _page.Url, "Should redirect to login");
         }
 
         [TearDown]

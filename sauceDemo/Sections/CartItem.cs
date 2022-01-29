@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 
 namespace sauceDemo.Components
 {

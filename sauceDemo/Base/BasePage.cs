@@ -13,19 +13,17 @@ namespace sauceDemo
     {
         protected IPage Page;
 
-        private string _burgerMenuId = "#react-burger-menu-btn";
-        private string _logoutMenuItem = "#logout_sidebar_link";
-        private string _shoppingCartBadge = "span.shopping_cart_badge";
+        private ILocator _burgerMenuId;
+        private ILocator _logoutMenuItem;
+        private ILocator _shoppingCartBadge;
 
         public BasePage(IPage page)
         {
             this.Page = page;
+            _shoppingCartBadge = Page.Locator("span.shopping_cart_badge");
+            _logoutMenuItem = Page.Locator("#logout_sidebar_link");
+            _burgerMenuId = Page.Locator("#react-burger-menu-btn");
         }
-
-        /// <summary>
-        /// Top Shoping cart icon 
-        /// </summary>
-        public IElementHandle ShopingCartIcon => Page.QuerySelectorAsync(_shoppingCartBadge).Result;
 
         /// <summary>
         /// Total the items in the shopping cart
@@ -34,9 +32,8 @@ namespace sauceDemo
         {
             get
             {
-               var element = Page.QuerySelectorAsync(_shoppingCartBadge).Result;
-               if (element!=null)
-                    return int.Parse(element.TextContentAsync().Result);
+               if (_shoppingCartBadge.IsVisibleAsync().Result)
+                    return int.Parse(_shoppingCartBadge.TextContentAsync().Result);
                else
                     return 0;
             }
@@ -60,12 +57,22 @@ namespace sauceDemo
         /// Click in the hamburger menu
         /// </summary>
         /// <returns></returns>
-        public async Task ClickMenu() => await Page.ClickAsync(_burgerMenuId);
+        public async Task ClickMenuAsync() => await _burgerMenuId.ClickAsync();
 
+        /// <summary>
+        /// Click in shopping cart badge
+        /// </summary>
+        /// <returns></returns>
+        public async Task ClickShoppingCartBadgeAsync() => await _shoppingCartBadge.ClickAsync();
+
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
         public async Task Logout()
         {
-            await ClickMenu();
-            await Page.ClickAsync(_logoutMenuItem);
+            await ClickMenuAsync();
+            await _logoutMenuItem.ClickAsync();
         }
 
     }

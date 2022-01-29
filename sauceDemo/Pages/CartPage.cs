@@ -10,11 +10,13 @@ namespace sauceDemo.Pages
     {
         private ILocator _checkoutButton;
         private ILocator _continueShoppingButton;
+        public CartItems CartItems;
 
         public CartPage(IPage page) : base(page)
         {
             _checkoutButton = page.Locator("data-test=checkout");
             _continueShoppingButton = page.Locator("data-test=continue-shopping");
+            CartItems = new CartItems(this.Page);
         }
 
         /// <summary>
@@ -24,12 +26,14 @@ namespace sauceDemo.Pages
         {
             get
             {
-                var listCartItems = new CartItems(this.Page);
-                return listCartItems.Items;
+                return CartItems.Items;
             }
         }
 
-        //Async due to the framework is async
+        /// <summary>
+        /// Click checkout
+        /// </summary>
+        /// <returns></returns>
         public async Task ClickCheckoutAsync()
         {
             await _checkoutButton.ClickAsync();
@@ -49,23 +53,12 @@ namespace sauceDemo.Pages
         }
 
         /// <summary>
-        /// Check item to reuse in different test cases
-        /// </summary>
-        /// <param name="item">item to check</param>
-        public void CheckCartItem(string item)
-        {
-            var cartItem = Items.Find(i => i.Name == item);
-            Assert.AreEqual(1, cartItem.Quantity);
-            Assert.AreEqual(item, cartItem.Name);
-        }
-
-        /// <summary>
         /// Check total of items to reuse in different test cases
         /// </summary>
         /// <param name="total">Total the items in the cart</param>
         public void CheckItemsInCart(int total)
         {
-            Assert.AreEqual(total, ItemsInShoppingCart);
+            Assert.AreEqual(total, ItemsInShoppingCart, "Total items in the cart is different");
         }
     }
 }
