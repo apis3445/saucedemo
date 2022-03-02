@@ -8,8 +8,8 @@ variables:
   buildConfiguration: 'Release'
 
 schedules:
-- cron: "0 0,20 * * 1-5"
-  displayName: Run each 6 horus
+- cron: "0 */6 * * 1-5"
+  displayName: Run each 6 hours
   always: true
   branches:
     include:
