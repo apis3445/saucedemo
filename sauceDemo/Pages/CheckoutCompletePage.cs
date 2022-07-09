@@ -1,19 +1,18 @@
 ﻿using Microsoft.Playwright;
 
-namespace sauceDemo.Pages
+namespace sauceDemo.Pages;
+
+public class CheckoutCompletePage : BasePage
 {
-    public class CheckoutCompletePage : BasePage
+    private ILocator _thanks;
+
+    public CheckoutCompletePage(IPage page) : base(page)
     {
-        private ILocator _thanks;
-
-        public CheckoutCompletePage(IPage page) : base(page)
-        {
-            _thanks = page.Locator("h2.complete-header");
-        }
-
-        /// <summary>
-        /// Thanks message
-        /// </summary>
-        public string Thanks => _thanks.TextContentAsync().Result;
+        _thanks = page.Locator("h2.complete-header");
     }
+
+    /// <summary>
+    /// Thanks message
+    /// </summary>
+    public string Thanks => _thanks.TextContentAsync().Result;
 }

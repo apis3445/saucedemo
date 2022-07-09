@@ -2,27 +2,26 @@
 using System.Diagnostics.CodeAnalysis;
 using sauceDemo.Components;
 
-namespace sauceDemo.Base
+namespace sauceDemo.Base;
+
+public class ItemComparer : IEqualityComparer<InventoryItem>
 {
-    public class ItemComparer : IEqualityComparer<InventoryItem>
+    public bool Equals(InventoryItem x, InventoryItem y)
     {
-        public bool Equals(InventoryItem x, InventoryItem y)
-        {
-            if (ReferenceEquals(x, y)) return true;
+        if (ReferenceEquals(x, y)) return true;
 
-            if (ReferenceEquals(x, null) || ReferenceEquals(y, null)) return false;
+        if (ReferenceEquals(x, null) || ReferenceEquals(y, null)) return false;
 
-            return x.Name == y.Name && x.Price == y.Price;
-        }
+        return x.Name == y.Name && x.Price == y.Price;
+    }
 
-        public int GetHashCode([DisallowNull] InventoryItem obj)
-        {
-            if (ReferenceEquals(obj, null)) return 0;
+    public int GetHashCode([DisallowNull] InventoryItem obj)
+    {
+        if (ReferenceEquals(obj, null)) return 0;
 
-            int hashCodeName = obj.Name == null ? 0 : obj.Name.GetHashCode();
-            int hasCodePrice = obj.Price.GetHashCode();
-            
-            return hashCodeName ^ hasCodePrice;
-        }
+        int hashCodeName = obj.Name == null ? 0 : obj.Name.GetHashCode();
+        int hasCodePrice = obj.Price.GetHashCode();
+        
+        return hashCodeName ^ hasCodePrice;
     }
 }
