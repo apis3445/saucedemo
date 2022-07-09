@@ -1,20 +1,21 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
+using sauceDemo.Components;
 
 namespace sauceDemo.Pages;
 
 public class LoginPage : BasePage
 {
-    private ILocator _userNameInput;
-    private ILocator _passwordInput;
-    private ILocator _loginButton;
+    private InputText _userNameInput;
+    private InputText _passwordInput;
+    private Button _loginButton;
     private ILocator _errorMessage;
     
     public LoginPage(IPage page) : base(page)
     {
-        _userNameInput = page.Locator("input[data-test='username']");
-        _passwordInput = page.Locator("input[data-test='password']");
-        _loginButton = page.Locator("input[data-test='login-button']");
+        _userNameInput = new InputText(page,"input[data-test='username']");
+        _passwordInput = new InputText(page, "input[data-test='password']");
+        _loginButton = new Button(page, "input[data-test='login-button']");
         _errorMessage = page.Locator("data-test=error");
     }
 

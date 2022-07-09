@@ -8,14 +8,14 @@ namespace sauceDemo.Pages;
 
 public class CartPage : BasePage
 {
-    private ILocator _checkoutButton;
-    private ILocator _continueShoppingButton;
+    private Button _checkoutButton;
+    private Button _continueShoppingButton;
     public CartItems CartItems;
 
     public CartPage(IPage page) : base(page)
     {
-        _checkoutButton = page.Locator("data-test=checkout");
-        _continueShoppingButton = page.Locator("data-test=continue-shopping");
+        _checkoutButton = new Button(page, "data-test=checkout");
+        _continueShoppingButton = new Button(page, "data-test=continue-shopping");
         CartItems = new CartItems(this.Page);
     }
 

@@ -1,10 +1,19 @@
-﻿namespace sauceDemo.Components
+﻿using System.Threading.Tasks;
+using Microsoft.Playwright;
+
+namespace sauceDemo.Components;
+
+public class Button : BaseLocator
 {
-    public class Button
+    public Button(IPage page, string locator) : base(page, locator)
     {
-        public Button()
-        {
-        }
+            
+    }
+
+    public async Task ClickAsync()
+    {
+        await this.Locator.HighlightAsync();
+        await this.Locator.ClickAsync();
     }
 }
 

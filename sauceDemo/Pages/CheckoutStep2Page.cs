@@ -8,12 +8,12 @@ namespace sauceDemo.Pages;
 public class CheckoutStep2Page : BasePage
 {
    
-    private ILocator _finishButton;
+    private Button _finishButton;
     public CartItems ListCartItems;
 
     public CheckoutStep2Page(IPage page) : base(page)
     {
-        _finishButton = page.Locator("data-test=finish");
+        _finishButton =new Button(page, "data-test=finish");
         ListCartItems = new CartItems(this.Page);
     }
 
