@@ -16,7 +16,7 @@
 - [ ] Tests cover a good subset of use case
 - [ ] Are the comments clear and useful?
 - [ ] Tests follow naming convention, style guides
-- [ ] PR is small as posible
+- [ ] PR is small as possible
 - [ ] Did also update relevant documentation?
 
 # Notes
