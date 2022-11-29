@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
@@ -54,6 +55,7 @@ public class LoginTests
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
         //Arrange
+        Console.WriteLine("Test");
         //Act
         await _loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
