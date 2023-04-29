@@ -34,6 +34,6 @@ public class ShopTests : BaseTest
         await checkoutStep2.CickFinishAsync();
         //Additional assert to check complete
         CheckoutCompletePage checkoutComplete = new CheckoutCompletePage(page);
-        Assert.AreEqual("THANK YOU FOR YOUR ORDER", checkoutComplete.Thanks, "Thanks message for the order is not visible");
+        Assert.AreEqual("Thank you for your order!", checkoutComplete.Thanks, "Thanks message for the order is not visible");
     }
 }
