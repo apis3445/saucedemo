@@ -19,7 +19,7 @@ public class InventoryItemPage : BasePage
     {
         get
         {
-            var element = Page.QuerySelectorAsync("div.inventory_details_container").Result;
+            var element = Page.Locator("div.inventory_details_container");
             InventoryItem item = new InventoryItem(element,"details");
             return item;
         }

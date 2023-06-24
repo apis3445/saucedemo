@@ -24,7 +24,7 @@ public class InventoryPage : BasePage
         get
         {
             var listItems = new List<InventoryItem>();
-            var inventoryItems = Page.QuerySelectorAllAsync("div.inventory_item").Result;
+            var inventoryItems = Page.Locator("div.inventory_item").AllAsync().Result;
             foreach (var item in inventoryItems)
             {
                 InventoryItem inventoryItem = new InventoryItem(item,"item");                  
