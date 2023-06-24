@@ -5,14 +5,14 @@ namespace sauceDemo.Components;
 
 public class Item
 {
-    protected IElementHandle element;
+    protected ILocator element;
 
     private string _name;
     private string _description;
     private string _price;
     private string _cartButton;
 
-    public Item(IElementHandle element, string type)
+    public Item(ILocator element, string type)
     {
         this.element = element;
         _name = $"div.inventory_{type}_name";
@@ -24,17 +24,17 @@ public class Item
     /// <summary>
     /// Formatted Price 
     /// </summary>
-    public string FormatedPrice => element.QuerySelectorAsync(_price).Result.TextContentAsync().Result;
+    public string FormatedPrice => element.Locator(_price).TextContentAsync().Result;
 
     /// <summary>
     /// Item's name
     /// </summary>
-    public string Name => element.QuerySelectorAsync(_name).Result.TextContentAsync().Result;
+    public string Name => element.Locator(_name).TextContentAsync().Result;
 
     /// <summary>
     /// Item's Description
     /// </summary>
-    public string Description => element.QuerySelectorAsync(_description).Result.TextContentAsync().Result;
+    public string Description => element.Locator(_description).TextContentAsync().Result;
 
     /// <summary>
     /// Price
@@ -44,7 +44,7 @@ public class Item
     /// <summary>
     /// Button for the item
     /// </summary>
-    public IElementHandle CartButton => element.QuerySelectorAsync(_cartButton).Result;
+    public ILocator CartButton => element.Locator(_cartButton);
 
     /// <summary>
     /// Clic

@@ -25,7 +25,7 @@ public class CartItems
         get
         {
             var listCartItems = new List<CartItem>();
-            var inventoryItems = this._page.QuerySelectorAllAsync("div.cart_item").Result;
+            var inventoryItems = this._page.Locator("div.cart_item").AllAsync().Result;
             foreach (var item in inventoryItems)
             {
                 CartItem cartItem = new CartItem(item, "item");

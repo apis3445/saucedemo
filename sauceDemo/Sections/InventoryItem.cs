@@ -11,7 +11,7 @@ public class InventoryItem : Item
     /// </summary>
     /// <param name="element">Main element</param>
     /// <param name="type">Type of the image</param>
-    public InventoryItem(IElementHandle element, string type): base(element, type)
+    public InventoryItem(ILocator element, string type): base(element, type)
     {
         _image = $"img.inventory_{type}_img";
     }
@@ -19,6 +19,6 @@ public class InventoryItem : Item
     /// <summary>
     /// Image for the item
     /// </summary>
-    public string Image => element.QuerySelectorAsync(_image).Result.GetAttributeAsync("src").Result;
+    public string Image => element.Locator(_image).GetAttributeAsync("src").Result;
 
 }
