@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using sauceDemo.Components;
 
 namespace sauceDemo.Base;
 
-public class ItemComparer : IEqualityComparer<InventoryItem>
+public class ItemComparer : IEqualityComparer<ItemPrice>
 {
-    public bool Equals(InventoryItem x, InventoryItem y)
+    public bool Equals(ItemPrice x, ItemPrice y)
     {
         if (ReferenceEquals(x, y)) return true;
 
@@ -15,7 +14,7 @@ public class ItemComparer : IEqualityComparer<InventoryItem>
         return x.Name == y.Name && x.Price == y.Price;
     }
 
-    public int GetHashCode([DisallowNull] InventoryItem obj)
+    public int GetHashCode([DisallowNull] ItemPrice obj)
     {
         if (ReferenceEquals(obj, null)) return 0;
 
@@ -24,4 +23,5 @@ public class ItemComparer : IEqualityComparer<InventoryItem>
         
         return hashCodeName ^ hasCodePrice;
     }
+
 }

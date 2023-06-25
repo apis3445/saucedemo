@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using sauceDemo.Base;
+using sauceDemo.Components;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests;
@@ -18,12 +20,16 @@ public class InventoryTests : BaseTest
         //Arrange
         var comparer = new ItemComparer();
         var items = inventoryPage.Items;
-        var itemsByPriceDes = items.OrderBy(i => i.Price).ToList(); 
+        var itemsByPriceDes = items.OrderBy(i => i.Price).ToList();
+        var itemsByPrice = new ItemsByPrice(itemsByPriceDes);
+
         //Act
         await inventoryPage.SetSortAsync("lohi");
-        items = inventoryPage.Items;
+        var itemsAfterSort = inventoryPage.Items;
+        var currentItems = new ItemsByPrice(itemsAfterSort);
+
         //Assert
-        Assert.IsTrue(Enumerable.SequenceEqual(itemsByPriceDes, items, comparer),"Items are not sorted by price low to hi");
+        Assert.IsTrue(Enumerable.SequenceEqual(itemsByPrice.Items, currentItems.Items, comparer),"Items are not sorted by price low to hi");
     }
 
     [Test, Category("Inventory")]
