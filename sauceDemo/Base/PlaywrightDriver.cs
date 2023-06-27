@@ -31,7 +31,7 @@ public class PlaywrightDriver
         };
     }
 
-    public async Task<IPage> InitalizePlaywrightTracing()
+    public async Task<IPage> InitalizePlaywrightTracingAsync()
     {
         var browser = await InitBrowserAsync();
         Context = await browser.NewContextAsync();

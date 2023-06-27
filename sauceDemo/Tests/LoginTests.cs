@@ -21,7 +21,7 @@ public class LoginTests
     public async Task Setup()
     {            
         PlaywrightDriver playwrightDriver = new PlaywrightDriver();
-        _page = await playwrightDriver.InitalizePlaywrightTracing();
+        _page = await playwrightDriver.InitalizePlaywrightTracingAsync();
         _context = playwrightDriver.Context;
         _loginPage = new LoginPage(_page);
         await _loginPage.GotoAsync();
@@ -72,7 +72,7 @@ public class LoginTests
         await _loginPage.LoginAsync(_standardUser, _genericPassword);
         InventoryPage inventoryPage = new InventoryPage(_page);
         //Act
-        await inventoryPage.Logout();
+        await inventoryPage.LogoutAsync();
         //Assert
         Assert.AreEqual(_baseAddress, _page.Url, "Should redirect to login");
     }

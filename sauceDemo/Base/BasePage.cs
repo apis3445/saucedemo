@@ -69,7 +69,7 @@ public class BasePage
     /// Logout
     /// </summary>
     /// <returns></returns>
-    public async Task Logout()
+    public async Task LogoutAsync()
     {
         await ClickMenuAsync();
         await _logoutMenuItem.ClickAsync();
