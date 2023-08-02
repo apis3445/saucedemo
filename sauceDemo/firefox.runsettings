@@ -9,6 +9,6 @@
     </EnvironmentVariables>
   </RunConfiguration>
   <NUnit>
-    <NumberOfTestWorkers>24</NumberOfTestWorkers>
+    <NumberOfTestWorkers>2</NumberOfTestWorkers>
   </NUnit>
 </RunSettings>
