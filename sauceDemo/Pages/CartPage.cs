@@ -8,14 +8,14 @@ namespace sauceDemo.Pages;
 
 public class CartPage : BasePage
 {
-    private Button _checkoutButton;
-    private Button _continueShoppingButton;
+    private Button _checkout;
+    private Button _continueShopping;
     public CartItems CartItems;
 
     public CartPage(IPage page) : base(page)
     {
-        _checkoutButton = new Button(page, "data-test=checkout");
-        _continueShoppingButton = new Button(page, "data-test=continue-shopping");
+        _checkout = new Button(page, "data-test=checkout");
+        _continueShopping = new Button(page, "data-test=continue-shopping");
         CartItems = new CartItems(this.Page);
     }
 
@@ -36,7 +36,7 @@ public class CartPage : BasePage
     /// <returns></returns>
     public async Task ClickCheckoutAsync()
     {
-        await _checkoutButton.ClickAsync();
+        await _checkout.ClickAsync();
         //Added screenshot maybe check environment variabl to save in local development or connect
         //to third party report tool like report portal
        await TakeScreenShootAsync("Checkout");
@@ -48,7 +48,7 @@ public class CartPage : BasePage
     /// <returns></returns>
     public async Task ClickContinueShoppingAsync()
     {
-        await _continueShoppingButton.ClickAsync();
+        await _continueShopping.ClickAsync();
         await TakeScreenShootAsync("ContinueShopping");
     }
 

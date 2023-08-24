@@ -4,7 +4,7 @@ namespace sauceDemo.Components;
 
 public class CartItem: Item
 {
-    private string _quantityLocator = "div.cart_quantity";
+    private string _quantity = "div.cart_quantity";
 
     public CartItem(ILocator element, string type) : base(element, type)
     {
@@ -13,6 +13,6 @@ public class CartItem: Item
     /// <summary>
     /// Quantity for the item
     /// </summary>
-    public decimal Quantity => int.Parse(element.Locator(_quantityLocator).TextContentAsync().Result);
+    public decimal Quantity => int.Parse(element.Locator(_quantity).TextContentAsync().Result);
 
 }

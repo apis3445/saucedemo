@@ -6,21 +6,21 @@ namespace sauceDemo.Pages;
 
 public class CheckoutStep1Page : BasePage
 {
-    private InputText _firstNameInputLocator;
-    private InputText _lastNameInputLocator;
-    private InputText _postalCodeInputLocator;
-    private Button _continueButtonLocator;
+    private InputText _firstName;
+    private InputText _lastName;
+    private InputText _postalCode;
+    private Button _continue;
 
-    public string FirstName => _firstNameInputLocator.TextContent();
-    public string LastName => _lastNameInputLocator.TextContent();
-    public string PostalCode => _postalCodeInputLocator.TextContent();
+    public string FirstName => _firstName.TextContent();
+    public string LastName => _lastName.TextContent();
+    public string PostalCode => _postalCode.TextContent();
 
     public CheckoutStep1Page(IPage page) : base(page)
     {
-        _firstNameInputLocator = new InputText(page, "input[data-test='firstName']");
-        _lastNameInputLocator = new InputText(page, "input[data-test='lastName']");
-        _postalCodeInputLocator = new InputText(page, "input[data-test='postalCode']");
-        _continueButtonLocator = new Button(page, "input[data-test='continue']");
+        _firstName = new InputText(page, "input[data-test='firstName']");
+        _lastName = new InputText(page, "input[data-test='lastName']");
+        _postalCode = new InputText(page, "input[data-test='postalCode']");
+        _continue = new Button(page, "input[data-test='continue']");
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ public class CheckoutStep1Page : BasePage
     /// <returns></returns>
     public async Task SetFirstNameAsync(string value)
     {
-        await this._firstNameInputLocator.FillAsync(value);
+        await this._firstName.FillAsync(value);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class CheckoutStep1Page : BasePage
     /// <returns></returns>
     public async Task SetLastNameAsync(string value)
     {
-        await this._lastNameInputLocator.FillAsync(value);
+        await this._lastName.FillAsync(value);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class CheckoutStep1Page : BasePage
     /// <returns></returns>
     public async Task SetPostalCodeAsync(string value)
     {
-        await _postalCodeInputLocator.FillAsync(value);
+        await _postalCode.FillAsync(value);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class CheckoutStep1Page : BasePage
     /// <returns></returns>
     public async Task ClickContinueAsync()
     {
-        await _continueButtonLocator.ClickAsync();
+        await _continue.ClickAsync();
         await TakeScreenShootAsync("ContinueCheckout");
     }
 }

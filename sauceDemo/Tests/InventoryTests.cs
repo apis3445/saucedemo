@@ -18,7 +18,7 @@ public class InventoryTests : BaseTest
     public async Task SortProducts_ByLowToHighPrice_SortByLowestPriceAsync()
     {
         //Arrange
-        var comparer = new ItemComparer();
+       
         var items = inventoryPage.Items;
         var itemsByPriceDes = items.OrderBy(i => i.Price).ToList();
         var itemsByPrice = new ItemsByPrice(itemsByPriceDes);

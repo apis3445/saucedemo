@@ -7,14 +7,14 @@ namespace sauceDemo.Pages;
 public class LoginPage : BasePage
 {
     private InputText _userName;
-    private InputText _password;
+    private Password _password;
     private Button _login;
     private ILocator _errorMessage;
     
     public LoginPage(IPage page) : base(page)
     {
         _userName = new InputText(page,"input[data-test='username']");
-        _password = new InputText(page, "input[data-test='password']");
+        _password = new Password(page, "input[data-test='password']");
         _login = new Button(page, "input[data-test='login-button']");
         _errorMessage = page.Locator("data-test=error");
     }

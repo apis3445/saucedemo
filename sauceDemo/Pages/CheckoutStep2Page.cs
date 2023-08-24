@@ -8,12 +8,12 @@ namespace sauceDemo.Pages;
 public class CheckoutStep2Page : BasePage
 {
    
-    private Button _finishButton;
+    private Button _finish;
     public CartItems ListCartItems;
 
     public CheckoutStep2Page(IPage page) : base(page)
     {
-        _finishButton =new Button(page, "data-test=finish");
+        _finish =new Button(page, "data-test=finish");
         ListCartItems = new CartItems(this.Page);
     }
 
@@ -34,7 +34,7 @@ public class CheckoutStep2Page : BasePage
     /// <returns></returns>
     public async Task CickFinishAsync()
     {
-        await _finishButton.ClickAsync();
+        await _finish.ClickAsync();
         await TakeScreenShootAsync("finishClick");
     }
 }
