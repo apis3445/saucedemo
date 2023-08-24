@@ -6,7 +6,7 @@ namespace sauceDemo.Base;
 /// <summary>
 /// Added interface to execute api 
 /// </summary>
-public interface IRestSharpTest
+public interface IApiHelper
 {
     /// <summary>
     /// Add jwt token

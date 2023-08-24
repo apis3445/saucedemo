@@ -1,15 +1,13 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using RestSharp;
-using RestSharp.Authenticators;
 
 namespace sauceDemo.Base;
 
 /// <summary>
 /// Call to rest api service with RestSharp
 /// </summary>
-public class RestSharpTest : IRestSharpTest
+public class RestSharpApi : IApiHelper
 {
     private RestClient _client;
     private RestRequest _request = new RestRequest();
@@ -20,7 +18,7 @@ public class RestSharpTest : IRestSharpTest
     /// Constructor
     /// </summary>
     /// <param name="baseUrl">Base Url</param>
-    public RestSharpTest(string baseUrl)
+    public RestSharpApi(string baseUrl)
     {
         _baseUrl = baseUrl;
         _client = new RestClient(baseUrl);

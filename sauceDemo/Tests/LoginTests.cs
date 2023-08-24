@@ -14,8 +14,8 @@ public class LoginTests
     private const string _standardUser = "standard_user";
     private string _baseAddress = Initialize.BaseAddress;
     private IPage _page;
-    private LoginPage _loginPage;
     private IBrowserContext _context;
+    protected LoginPage loginPage;
 
     [SetUp]
     public async Task Setup()
@@ -23,18 +23,17 @@ public class LoginTests
         PlaywrightDriver playwrightDriver = new PlaywrightDriver();
         _page = await playwrightDriver.InitalizePlaywrightTracingAsync();
         _context = playwrightDriver.Context;
-        _loginPage = new LoginPage(_page);
-        await _loginPage.GotoAsync();
+        loginPage = new LoginPage(_page);
+        await loginPage.GotoAsync();
     }
 
     [Test,  Category("Login")]
     [TestCase(_standardUser, _genericPassword)]
     public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
     {
-        //Arrange
-              
+        //Arrange      
         //Act
-        await _loginPage.LoginAsync(user, password);
+        await loginPage.LoginAsync(user, password);
         //Assert
         Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url, "Main Page for user is not show");
        
@@ -45,10 +44,10 @@ public class LoginTests
     {
         //Arrange
         //Act
-        await _loginPage.LoginAsync("invalidUser", _genericPassword);
+        await loginPage.LoginAsync("invalidUser", _genericPassword);
         //Assert
-        Assert.IsTrue(await _loginPage.HasError());
-        Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await _loginPage.GetErrorAsync(), "Should show username and password error");
+        Assert.IsTrue(await loginPage.HasError());
+        Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync(), "Should show username and password error");
     }
 
     [Test,  Category("Login")]
@@ -57,19 +56,19 @@ public class LoginTests
         //Arrange
         Console.WriteLine("Test");
         //Act
-        await _loginPage.LoginAsync("locked_out_user", _genericPassword);
+        await loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
         //To check if the div with error is visible
-        Assert.IsTrue(await _loginPage.HasError(), "Error is not visible");
+        Assert.IsTrue(await loginPage.HasError(), "Error is not visible");
         //Only if you want to check the error messsage not only error div
-        Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await _loginPage.GetErrorAsync(), "Should show locked user");
+        Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync(), "Should show locked user");
     }
 
     [Test,  Category("Login")]
     public async Task Logout_FromHomePage_RedirectToLogin()
     {
         //Arrange
-        await _loginPage.LoginAsync(_standardUser, _genericPassword);
+        await loginPage.LoginAsync(_standardUser, _genericPassword);
         InventoryPage inventoryPage = new InventoryPage(_page);
         //Act
         await inventoryPage.LogoutAsync();
