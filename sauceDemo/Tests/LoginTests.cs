@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
@@ -27,7 +26,7 @@ public class LoginTests
         await loginPage.GotoAsync();
     }
 
-    [Test,  Category("Login")]
+    [Test, Category("Login")]
     [TestCase(_standardUser, _genericPassword)]
     public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
     {
@@ -36,10 +35,9 @@ public class LoginTests
         await loginPage.LoginAsync(user, password);
         //Assert
         Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url, "Main Page for user is not show");
-       
     }
 
-    [Test,  Category("Login")]
+    [Test, Category("Login")]
     public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
     {
         //Arrange
@@ -50,11 +48,10 @@ public class LoginTests
         Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync(), "Should show username and password error");
     }
 
-    [Test,  Category("Login")]
+    [Test, Category("Login")]
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
         //Arrange
-        Console.WriteLine("Test");
         //Act
         await loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
@@ -64,7 +61,7 @@ public class LoginTests
         Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync(), "Should show locked user");
     }
 
-    [Test,  Category("Login")]
+    [Test, Category("Login")]
     public async Task Logout_FromHomePage_RedirectToLogin()
     {
         //Arrange

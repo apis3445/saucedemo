@@ -47,7 +47,7 @@ public class Item
     public ILocator CartButton => element.Locator(_cartButton);
 
     /// <summary>
-    /// Clic
+    /// Click in the cart button
     /// </summary>
     /// <returns></returns>
     public async Task ClickCartButtonAsync()
