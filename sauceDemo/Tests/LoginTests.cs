@@ -3,11 +3,13 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
+using Microsoft.Playwright.NUnit;
+using System.Text.RegularExpressions;
 
 namespace sauceDemo.Tests;
 
 [Parallelizable]
-public class LoginTests
+public class LoginTests : PageTest
 {
     private const string _genericPassword = "secret_sauce";
     private const string _standardUser = "standard_user";
@@ -34,6 +36,7 @@ public class LoginTests
         //Act
         await loginPage.LoginAsync(user, password);
         //Assert
+        await Expect(_page).ToHaveURLAsync(_baseAddress + Constants.INVENTORY_PAGE);
         Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url, "Main Page for user is not show");
     }
 
