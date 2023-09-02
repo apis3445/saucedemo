@@ -99,4 +99,9 @@ public class BasePage
         return this.annotationHelper.GetAnnotations();
     }
 
+    public void AddDescription(string description)
+    {
+        this.annotationHelper.AddAnnotation(AnnotationType.Description, description);
+    }
+
 }

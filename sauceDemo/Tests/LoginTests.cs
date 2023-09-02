@@ -24,14 +24,15 @@ public class LoginTests
         _page = await playwrightDriver.InitalizePlaywrightTracingAsync();
         _context = playwrightDriver.Context;
         loginPage = new LoginPage(_page);
-        await loginPage.GotoAsync();
     }
 
     [Test, Category("Login")]
     [TestCase(_standardUser, _genericPassword)]
     public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
     {
-        //Arrange      
+        loginPage.AddDescription("Login with a valid user loads the product page");
+        //Arrange
+        await loginPage.GotoAsync();
         //Act
         await loginPage.LoginAsync(user, password);
         //Assert
@@ -42,7 +43,9 @@ public class LoginTests
     [Test, Category("Login")]
     public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
     {
+        loginPage.AddDescription("Login with a invalid user loads shows error message");
         //Arrange
+        await loginPage.GotoAsync();
         //Act
         await loginPage.LoginAsync("invalidUser", _genericPassword);
         //Assert
@@ -53,7 +56,9 @@ public class LoginTests
     [Test, Category("Login")]
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
+        loginPage.AddDescription("Login with a locled user loads shows locked error message");
         //Arrange
+        await loginPage.GotoAsync();
         //Act
         await loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
@@ -66,13 +71,14 @@ public class LoginTests
     [Test, Category("Login")]
     public async Task Logout_FromHomePage_RedirectToLogin()
     {
+        loginPage.AddDescription("Logout redirects to login");
         //Arrange
+        await loginPage.GotoAsync();
         await loginPage.LoginAsync(_standardUser, _genericPassword);
         InventoryPage inventoryPage = new InventoryPage(_page);
         //Act
         await inventoryPage.LogoutAsync();
         //Assert
-        await Expect(_page).ToHaveURLAsync(_baseAddress);
         loginPage.AssertEqual(_baseAddress, _page.Url, "Should redirect to login");
     }
 
