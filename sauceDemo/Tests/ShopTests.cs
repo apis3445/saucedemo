@@ -26,7 +26,7 @@ public class ShopTests : BaseTest
         await checkoutStep1.ClickContinueAsync();
         CheckoutStep2Page checkoutStep2 = new CheckoutStep2Page(page);
         //Assert
-        Assert.AreEqual(totalItems, checkoutStep2.ItemsInShoppingCart, "Items in the cart are different");
+        inventoryPage.AssertEqual(totalItems, checkoutStep2.ItemsInShoppingCart, "Items in the cart are different");
         for (int i = 0; i < totalItems; i++)
         {
             checkoutStep2.ListCartItems.CheckCartItem(inventoryPage.ItemsName[i]);
@@ -34,6 +34,6 @@ public class ShopTests : BaseTest
         await checkoutStep2.CickFinishAsync();
         //Additional assert to check complete
         CheckoutCompletePage checkoutComplete = new CheckoutCompletePage(page);
-        Assert.AreEqual("Thank you for your order!", checkoutComplete.Thanks, "Thanks message for the order is not visible");
+        inventoryPage.AssertEqual("Thank you for your order!", checkoutComplete.Thanks, "Thanks message for the order is not visible");
     }
 }

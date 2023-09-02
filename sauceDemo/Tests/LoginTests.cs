@@ -35,8 +35,8 @@ public class LoginTests
         //Act
         await loginPage.LoginAsync(user, password);
         //Assert
-        await Expect(_page).ToHaveURLAsync(_baseAddress + Constants.INVENTORY_PAGE);
-        Assert.AreEqual(_baseAddress +  Constants.INVENTORY_PAGE, _page.Url, "Main Page for user is not show");
+        string expectedPage = _baseAddress + Constants.INVENTORY_PAGE;
+        loginPage.AssertEqual(expectedPage, _page.Url, "Check URL Page equal to: '" + expectedPage + "'");
     }
 
     [Test, Category("Login")]
@@ -47,7 +47,7 @@ public class LoginTests
         await loginPage.LoginAsync("invalidUser", _genericPassword);
         //Assert
         Assert.IsTrue(await loginPage.HasError());
-        Assert.AreEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync(), "Should show username and password error");
+        loginPage.AssertEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync(), "Should show 'username and password error'");
     }
 
     [Test, Category("Login")]
@@ -60,7 +60,7 @@ public class LoginTests
         //To check if the div with error is visible
         Assert.IsTrue(await loginPage.HasError(), "Error is not visible");
         //Only if you want to check the error messsage not only error div
-        Assert.AreEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync(), "Should show locked user");
+        loginPage.AssertEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync(), "Should show 'locked user'");
     }
 
     [Test, Category("Login")]
@@ -73,7 +73,7 @@ public class LoginTests
         await inventoryPage.LogoutAsync();
         //Assert
         await Expect(_page).ToHaveURLAsync(_baseAddress);
-        Assert.AreEqual(_baseAddress, _page.Url, "Should redirect to login");
+        loginPage.AssertEqual(_baseAddress, _page.Url, "Should redirect to login");
     }
 
     [TearDown]

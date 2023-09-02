@@ -13,7 +13,7 @@ public class CheckoutStep2Page : BasePage
 
     public CheckoutStep2Page(IPage page) : base(page)
     {
-        _finish =new Button(page, "data-test=finish");
+        _finish =new Button(page, "data-test=finish", this.annotationHelper);
         ListCartItems = new CartItems(this.Page);
     }
 

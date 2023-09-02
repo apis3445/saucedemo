@@ -63,8 +63,8 @@ public class InventoryTests : BaseTest
         await inventoryItemPage.Item.ClickCartButtonAsync();
         var name = inventoryItemPage.Item.Name;
         //Assert
-        Assert.AreEqual(_fixItem, name, "Item name in cart is different");
-        Assert.AreEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync(), "Cart button doesn't show Remove text");
+        inventoryItemPage.AssertEqual(_fixItem, name, "Check Item name in cart is: " + _fixItem);
+        inventoryItemPage.AssertEqual("Remove", await inventoryItemPage.Item.CartButton.TextContentAsync(), "Check Cart button shows Remove text");
         await inventoryPage.ClickShoppingCartBadgeAsync();
         CartPage cartPage = new CartPage(page);
         cartPage.CheckItemsInCart(1);

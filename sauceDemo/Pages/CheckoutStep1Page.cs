@@ -17,10 +17,10 @@ public class CheckoutStep1Page : BasePage
 
     public CheckoutStep1Page(IPage page) : base(page)
     {
-        _firstName = new InputText(page, "input[data-test='firstName']");
-        _lastName = new InputText(page, "input[data-test='lastName']");
-        _postalCode = new InputText(page, "input[data-test='postalCode']");
-        _continue = new Button(page, "input[data-test='continue']");
+        _firstName = new InputText(page, "input[data-test='firstName']", this.annotationHelper);
+        _lastName = new InputText(page, "input[data-test='lastName']", this.annotationHelper);
+        _postalCode = new InputText(page, "input[data-test='postalCode']", this.annotationHelper);
+        _continue = new Button(page, "input[data-test='continue']", this.annotationHelper);
     }
 
     /// <summary>

@@ -1,17 +1,28 @@
-﻿using Microsoft.Playwright;
+﻿using System.Threading.Tasks;
+using Microsoft.Playwright;
+using sauceDemo.Base;
 
 namespace sauceDemo.Components;
 
 public class BaseLocator
 {
+    protected string label;
 
-    public ILocator Locator { get; set; }
-    public IPage Page { get; }
+    protected ILocator Locator { get; set; }
+    protected IPage Page { get; }
+    protected AnnotationHelper AnnotationHelper { get;  }
 
-    public BaseLocator(IPage page, string locator)
+    public BaseLocator(IPage page, string locator, AnnotationHelper annotationHelper)
     {
         this.Locator = page.Locator(locator);
-        Page = page;
+        this.Page = page;
+        this.AnnotationHelper = annotationHelper;
     }
 
+    public virtual async Task<string> GetLabelAsync()
+    {
+        if (this.label == null)
+            label = await this.Locator.GetAttributeAsync("placeholder");
+        return label;
+    }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
+using sauceDemo.Base;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace sauceDemo;
 
@@ -16,6 +19,8 @@ public class BasePage
     private ILocator _burgerMenuId;
     private ILocator _logoutMenuItem;
     private ILocator _shoppingCartBadge;
+    private IReporter _reporter;
+    protected AnnotationHelper annotationHelper;
 
     public BasePage(IPage page)
     {
@@ -23,6 +28,8 @@ public class BasePage
         _shoppingCartBadge = Page.Locator("span.shopping_cart_badge");
         _logoutMenuItem = Page.Locator("#logout_sidebar_link");
         _burgerMenuId = Page.Locator("#react-burger-menu-btn");
+        _reporter = new ConsoleReporter();
+        annotationHelper = new AnnotationHelper(_reporter);
     }
 
     /// <summary>
@@ -73,6 +80,23 @@ public class BasePage
     {
         await ClickMenuAsync();
         await _logoutMenuItem.ClickAsync();
+    }
+
+    public async Task GotoPageAsync(string page)
+    {
+        this.annotationHelper.AddAnnotation(AnnotationType.Step, "Go to the page: '" + page + "'");
+        await Page.GotoAsync(page);
+    }
+
+    public void AssertEqual(object expected, object actual, string errorMessage)
+    {
+        this.annotationHelper.AddAnnotation(AnnotationType.Assert, errorMessage);
+        Assert.AreEqual(expected, actual, errorMessage);
+    }
+
+    public List<Annotation> GetAnnotations ()
+    {
+        return this.annotationHelper.GetAnnotations();
     }
 
 }

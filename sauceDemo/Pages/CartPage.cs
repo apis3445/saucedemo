@@ -14,8 +14,8 @@ public class CartPage : BasePage
 
     public CartPage(IPage page) : base(page)
     {
-        _checkout = new Button(page, "data-test=checkout");
-        _continueShopping = new Button(page, "data-test=continue-shopping");
+        _checkout = new Button(page, "data-test=checkout", this.annotationHelper);
+        _continueShopping = new Button(page, "data-test=continue-shopping", this.annotationHelper);
         CartItems = new CartItems(this.Page);
     }
 

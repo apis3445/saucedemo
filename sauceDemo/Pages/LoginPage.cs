@@ -13,9 +13,9 @@ public class LoginPage : BasePage
     
     public LoginPage(IPage page) : base(page)
     {
-        _userName = new InputText(page,"input[data-test='username']");
-        _password = new Password(page, "input[data-test='password']");
-        _login = new Button(page, "input[data-test='login-button']");
+        _userName = new InputText(page,"input[data-test='username']", this.annotationHelper);
+        _password = new Password(page, "input[data-test='password']", this.annotationHelper);
+        _login = new Button(page, "input[data-test='login-button']", this.annotationHelper);
         _errorMessage = page.Locator("data-test=error");
     }
 
@@ -23,7 +23,7 @@ public class LoginPage : BasePage
     /// Go to Login page
     /// </summary>
     /// <returns></returns>
-    public async Task GotoAsync() => await Page.GotoAsync(Initialize.BaseAddress);
+    public async Task GotoAsync() => await this.GotoPageAsync(Initialize.BaseAddress);
 
     /// <summary>
     /// Get error messsage

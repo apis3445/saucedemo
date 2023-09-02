@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
+using sauceDemo.Base;
 
 namespace sauceDemo.Components;
 
 public class InputText : BaseLocator
 {
-    public InputText(IPage page, string locator) : base(page, locator)
+
+    public InputText(IPage page, string locator, AnnotationHelper annotationHelper) : base(page, locator, annotationHelper)
     {
 
     }
@@ -18,6 +20,7 @@ public class InputText : BaseLocator
     /// <returns></returns>
     public async Task TypeAsync(string value)
     {
+        this.AnnotationHelper.AddAnnotation(AnnotationType.Step, "Type the value: '" + value + "' in the input: '" + value + "'");
         await this.Locator.HighlightAsync();
         await this.Locator.TypeAsync(value);
     }
@@ -30,7 +33,8 @@ public class InputText : BaseLocator
     /// <returns></returns>
     public async Task FillAsync(string value)
     {
-        await this.Locator.HighlightAsync();
+        await this.GetLabelAsync();
+        this.AnnotationHelper.AddAnnotation(AnnotationType.Step, "Fill the input: '" + this.label + "' with the value: '" + value + "'");
         await this.Locator.FillAsync(value);
     }
 
