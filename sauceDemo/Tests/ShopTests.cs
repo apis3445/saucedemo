@@ -10,8 +10,10 @@ public class ShopTests : BaseTest
 {
 
     [Test, Category("Shop")]
+    [TestCase(TestName = "Add items and complete purchase")]
     public async Task AddItemsToShop_CompletePurchsse_ShouldShowsConfirmationPageAsync()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         int totalItems = 2;
         await inventoryPage.AddItemsAsync(totalItems);

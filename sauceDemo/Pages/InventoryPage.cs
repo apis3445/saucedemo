@@ -7,13 +7,13 @@ namespace sauceDemo.Pages;
 
 public class InventoryPage : BasePage
 {
-    private ILocator _comboSort;
+    private SelectCombo _comboSort;
 
     public List<string> ItemsName = new List<string>();
 
     public InventoryPage(IPage page) : base(page)
     {
-        _comboSort = page.Locator("data-test=product_sort_container");
+        _comboSort = new SelectCombo(page, "data-test=product_sort_container", this.annotationHelper);
     }
 
     /// <summary>

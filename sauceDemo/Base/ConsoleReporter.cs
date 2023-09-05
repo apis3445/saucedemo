@@ -6,9 +6,9 @@ namespace sauceDemo.Base
 
         public void PrintAnnotation(Annotation annotation)
         {
-            if (annotation.AnnotationType == AnnotationType.Description)
-                Console.WriteLine(AnnotationType.Description + ":" + annotation.Description);
-            else
+            if (annotation.AnnotationType == AnnotationType.Description || annotation.AnnotationType == AnnotationType.Name)
+                Console.WriteLine(annotation.AnnotationType + ": " + annotation.Description);
+            else 
                 Console.WriteLine(annotation.Description);
         }
     }

@@ -104,4 +104,9 @@ public class BasePage
         this.annotationHelper.AddAnnotation(AnnotationType.Description, description);
     }
 
+    public void AddName(string description)
+    {
+        this.annotationHelper.AddAnnotation(AnnotationType.Name, description);
+    }
+
 }

@@ -16,7 +16,7 @@ public class BaseTest
         PlaywrightDriver playwrightDriver = new PlaywrightDriver();
         page = await playwrightDriver.InitalizePlaywright();
         var loginPage = new LoginPage(page);
-        await loginPage.GotoAsync();
+        await loginPage.GotoAsync(AnnotationType.Precondition);
         await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
         inventoryPage = new InventoryPage(page);
     }

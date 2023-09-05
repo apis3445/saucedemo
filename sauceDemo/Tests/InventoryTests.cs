@@ -15,8 +15,10 @@ public class InventoryTests : BaseTest
     private string _fixItem = "Sauce Labs Onesie";
     
     [Test, Category("Inventory")]
+    [TestCase(TestName = "Sort products by low to high price")]
     public async Task SortProducts_ByLowToHighPrice_SortByLowestPriceAsync()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         var comparer = new ItemComparer();
         var items = inventoryPage.Items;
@@ -33,8 +35,10 @@ public class InventoryTests : BaseTest
     }
 
     [Test, Category("Inventory")]
+    [TestCase(TestName = "Add items to the shopping cart")]
     public async Task AddItems_FromInventory_ShouldAddItemsToShoppingCart()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         int total = 3;
         await inventoryPage.AddItemsAsync(total);
@@ -54,8 +58,10 @@ public class InventoryTests : BaseTest
     /// <returns></returns>
     /// <remarks>Option 1 by name</remarks>
     [Test, Category("Inventory")]
+    [TestCase(TestName = "Add items with name add to the shopping cart")]
     public async Task AddProduct_WithSpecificName_ShouldAddProductToShoppingCartAsync()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         //Act
         await inventoryPage.AddToCartByNameAsync(_fixItem);
@@ -77,8 +83,10 @@ public class InventoryTests : BaseTest
     /// <returns></returns>
     /// <remarks>Option 2 by DataTest</remarks>
     [Test, Category("Inventory")]
+    [TestCase(TestName = "Add items from button text to the shopping cart")]
     public async Task AddProduct_FromButtonText_ShouldAddProductToShoppingCartAsync()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         //Act
         await inventoryPage.AddToCartByDataTestNameAsync(_fixItem);
@@ -95,8 +103,10 @@ public class InventoryTests : BaseTest
     /// <returns></returns>
     /// <remarks>Option 3 by url</remarks>
     [Test, Category("Inventory")]
+    [TestCase(TestName = "Add items from index to the shopping cart")]
     public async Task AddProduct_FromUrl_ShouldAddProductToShoppingCartAsync()
     {
+        inventoryPage.AddName(TestContext.CurrentContext.Test.Name);
         //Arrange
         InventoryItemPage inventoryItemPage = new InventoryItemPage(page);
         int itemId = 2; //Sauce Labs Onesie has id = 2

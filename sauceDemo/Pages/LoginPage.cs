@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Playwright;
+using sauceDemo.Base;
 using sauceDemo.Components;
 
 namespace sauceDemo.Pages;
@@ -23,7 +24,7 @@ public class LoginPage : BasePage
     /// Go to Login page
     /// </summary>
     /// <returns></returns>
-    public async Task GotoAsync() => await this.GotoPageAsync(Initialize.BaseAddress);
+    public async Task GotoAsync(AnnotationType annotationType = AnnotationType.Step) => await this.GotoPageAsync(Initialize.BaseAddress);
 
     /// <summary>
     /// Get error messsage
