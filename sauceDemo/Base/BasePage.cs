@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace sauceDemo;
 
