@@ -22,7 +22,7 @@ public class InputText : BaseLocator
     {
         this.AnnotationHelper.AddAnnotation(AnnotationType.Step, "Type the value: '" + value + "' in the input: '" + value + "'");
         await this.Locator.HighlightAsync();
-        await this.Locator.TypeAsync(value);
+        await this.Locator.PressSequentiallyAsync(value);
     }
 
     /// <summary>
