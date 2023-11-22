@@ -2,6 +2,8 @@
 
 POC to E2E test with Playwright
 
+test
+
 ## Setup Playwright
 
 Install Playwright for C#
