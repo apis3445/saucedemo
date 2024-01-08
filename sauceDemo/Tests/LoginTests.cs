@@ -54,7 +54,7 @@ public class LoginTests
     }
 
     [Test, Category("Login")]
-    [TestCase(TestName = "Login with a locled user loads shows locked error message")]
+    [TestCase(TestName = "Login with a locked user loads shows locked error message")]
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
         //Arrange

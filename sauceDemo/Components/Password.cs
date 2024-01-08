@@ -19,7 +19,7 @@ public class Password : BaseLocator
     /// <returns></returns>
     public async Task FillAsync(string value)
     {
-        this.AnnotationHelper.AddAnnotation(AnnotationType.Step, "Fill the password: *******" );
+        this.AnnotationHelper.AddAnnotation(AnnotationType.Step, "Fill the password: " + value);
         await this.Locator.FillAsync(value);
     }
 }
