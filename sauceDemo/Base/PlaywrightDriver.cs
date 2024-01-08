@@ -20,6 +20,7 @@ public class PlaywrightDriver
     private async Task<IBrowser> InitBrowserAsync()
     {
         var playwright = await Playwright.CreateAsync();
+
         string browserType = Environment.GetEnvironmentVariable(Constants.BROWSER_TYPE);
         BrowserTypeLaunchOptions launchOptions = new BrowserTypeLaunchOptions { Headless = false };
         return browserType switch
@@ -44,5 +45,5 @@ public class PlaywrightDriver
         Page = await Context.NewPageAsync();
         return Page;
     }
-   
+
 }

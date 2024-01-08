@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
@@ -10,8 +11,8 @@ namespace sauceDemo.Tests;
 [Parallelizable]
 public class LoginTests 
 {
-    private const string _genericPassword = "secret_sauce";
-    private const string _standardUser = "standard_user";
+    private string _genericPassword;
+    private string _standardUser;
     private string _baseAddress = Initialize.BaseAddress;
     private IPage _page;
     private IBrowserContext _context;
@@ -26,6 +27,8 @@ public class LoginTests
         loginPage = new LoginPage(_page);
         loginPage.AddName(TestContext.CurrentContext.Test.Name);
         await loginPage.GotoAsync();
+        _standardUser = Environment.GetEnvironmentVariable("USER");
+        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
     }
 
     [Test, Category("Login")]

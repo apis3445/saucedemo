@@ -2,5 +2,7 @@
 <RunSettings>
   <NUnit>
     <NumberOfTestWorkers>2</NumberOfTestWorkers>
+    <BASE_ADDRESS>https://www.google.com/<BASE_ADDRESS>
+    <BROWSER_TYPE>Webkit</BROWSER_TYPE>
   </NUnit>
 </RunSettings>

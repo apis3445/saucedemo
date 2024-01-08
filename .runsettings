@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <NUnit>
+    <NumberOfTestWorkers>2</NumberOfTestWorkers>
+  </NUnit>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <BASE_ADDRESS>https://www.google.com/<BASE_ADDRESS>
+      <BROWSER_TYPE>Webkit</BROWSER_TYPE>
+     </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>
