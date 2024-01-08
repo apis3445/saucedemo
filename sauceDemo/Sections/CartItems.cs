@@ -42,7 +42,7 @@ public class CartItems
     public void CheckCartItem(string item)
     {
         var cartItem = Items.Find(i => i.Name == item);
-        Assert.AreEqual(1, cartItem.Quantity, "Total items in the cart is not one");
-        Assert.AreEqual(item, cartItem.Name, "Cart item is different");
+        Assert.That(1, Is.EqualTo(cartItem.Quantity), "Total items in the cart is not one");
+        Assert.That(item, Is.EqualTo(cartItem.Name), "Cart item is different");
     }
 }

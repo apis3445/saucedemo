@@ -4,15 +4,14 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Base;
 using sauceDemo.Pages;
-using static Microsoft.Playwright.Assertions;
 
 namespace sauceDemo.Tests;
 
 [Parallelizable]
 public class LoginTests 
 {
-    private string _genericPassword;
-    private string _standardUser;
+    string _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
+    string _standardUser = Environment.GetEnvironmentVariable("USER");
     private string _baseAddress = Initialize.BaseAddress;
     private IPage _page;
     private IBrowserContext _context;
@@ -27,18 +26,16 @@ public class LoginTests
         loginPage = new LoginPage(_page);
         loginPage.AddName(TestContext.CurrentContext.Test.Name);
         await loginPage.GotoAsync();
-        _standardUser = Environment.GetEnvironmentVariable("USER");
-        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
     }
 
     [Test, Category("Login")]
-    [TestCase(_standardUser, _genericPassword, TestName = "Login with valid user redirects to products page")]
+    [TestCase(TestName = "Login with valid user redirects to products page")]
     public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
     {
         //Arrange
         
         //Act
-        await loginPage.LoginAsync(user, password);
+        await loginPage.LoginAsync(_standardUser, _genericPassword);
         //Assert
         string expectedPage = _baseAddress + Constants.INVENTORY_PAGE;
         loginPage.AssertEqual(expectedPage, _page.Url, "Check URL Page equal to: '" + expectedPage + "'");
@@ -52,7 +49,7 @@ public class LoginTests
         //Act
         await loginPage.LoginAsync("invalidUser", _genericPassword);
         //Assert
-        Assert.IsTrue(await loginPage.HasError());
+        Assert.That(await loginPage.HasError(), Is.True);
         loginPage.AssertEqual("Epic sadface: Username and password do not match any user in this service", await loginPage.GetErrorAsync(), "Should show 'username and password error'");
     }
 
@@ -65,7 +62,7 @@ public class LoginTests
         await loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
         //To check if the div with error is visible
-        Assert.IsTrue(await loginPage.HasError(), "Error is not visible");
+        Assert.That(await loginPage.HasError(), Is.True, "Error is not visible");
         //Only if you want to check the error messsage not only error div
         loginPage.AssertEqual("Epic sadface: Sorry, this user has been locked out.", await loginPage.GetErrorAsync(), "Should show 'locked user'");
     }

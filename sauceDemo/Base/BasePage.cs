@@ -90,7 +90,7 @@ public class BasePage
     public void AssertEqual(object expected, object actual, string errorMessage)
     {
         this.annotationHelper.AddAnnotation(AnnotationType.Assert, errorMessage);
-        Assert.AreEqual(expected, actual, errorMessage);
+        Assert.That(expected, Is.EqualTo(actual), errorMessage);
     }
 
     public List<Annotation> GetAnnotations ()

@@ -58,6 +58,6 @@ public class CartPage : BasePage
     /// <param name="total">Total the items in the cart</param>
     public void CheckItemsInCart(int total)
     {
-        Assert.AreEqual(total, ItemsInShoppingCart, "Total items in the cart is different");
+        Assert.That(total, Is.EqualTo(ItemsInShoppingCart), "Total items in the cart is different");
     }
 }

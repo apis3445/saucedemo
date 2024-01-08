@@ -31,7 +31,7 @@ public class InventoryTests : BaseTest
         var currentItems = new ItemsByPrice(itemsAfterSort);
 
         //Assert
-        Assert.IsTrue(Enumerable.SequenceEqual(itemsByPrice.Items, currentItems.Items, comparer),"Items are not sorted by price low to hi");
+        Assert.That(Enumerable.SequenceEqual(itemsByPrice.Items, currentItems.Items, comparer), Is.True, "Items are not sorted by price low to hi");
     }
 
     [Test, Category("Inventory")]
