@@ -31,7 +31,7 @@ public class LoginTests
 
     [Test, Category("Login")]
     [TestCase(TestName = "Login with valid user redirects to products page")]
-    public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
+    public async Task Login_WithValidUser_NavigatesToProductsPageAsync()
     {
         //Arrange
         _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
@@ -44,7 +44,7 @@ public class LoginTests
     }
 
     [Test, Category("Login")]
-    [TestCase(TestName = "Login with a invalid user loads shows error message")]
+    [TestCase(TestName = "Login with a invalid user shows error message")]
     public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
     {
         //Arrange
@@ -57,7 +57,7 @@ public class LoginTests
     }
 
     [Test, Category("Login")]
-    [TestCase(TestName = "Login with a locked user loads shows locked error message")]
+    [TestCase(TestName = "Login with a locked user shows locked error message")]
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
         //Arrange

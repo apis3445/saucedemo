@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using sauceDemo.Pages;
@@ -16,8 +17,10 @@ public class BaseTest
         PlaywrightDriver playwrightDriver = new PlaywrightDriver();
         page = await playwrightDriver.InitalizePlaywright();
         var loginPage = new LoginPage(page);
+        var _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
+        var _standardUser = Environment.GetEnvironmentVariable("USER");
         await loginPage.GotoAsync(AnnotationType.Precondition);
-        await loginPage.LoginAsync(Constants.STANDARD_USER, Constants.GENERIC_PASSWORD);
+        await loginPage.LoginAsync(_standardUser, _genericPassword );
         inventoryPage = new InventoryPage(page);
     }
 }
