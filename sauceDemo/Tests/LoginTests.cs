@@ -10,8 +10,8 @@ namespace sauceDemo.Tests;
 [Parallelizable]
 public class LoginTests 
 {
-    string _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
-    string _standardUser = Environment.GetEnvironmentVariable("USER");
+    string _genericPassword;
+    string _standardUser;
     private string _baseAddress = Initialize.BaseAddress;
     private IPage _page;
     private IBrowserContext _context;
@@ -26,6 +26,7 @@ public class LoginTests
         loginPage = new LoginPage(_page);
         loginPage.AddName(TestContext.CurrentContext.Test.Name);
         await loginPage.GotoAsync();
+
     }
 
     [Test, Category("Login")]
@@ -33,7 +34,8 @@ public class LoginTests
     public async Task Login_WithValidUser_NavigatesToProductsPageAsync(string user, string password)
     {
         //Arrange
-        
+        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
+        _standardUser = Environment.GetEnvironmentVariable("USER");
         //Act
         await loginPage.LoginAsync(_standardUser, _genericPassword);
         //Assert
@@ -46,6 +48,7 @@ public class LoginTests
     public async Task Login_WithInvalidUser_ShowsErrorMessageAsync()
     {
         //Arrange
+        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
         //Act
         await loginPage.LoginAsync("invalidUser", _genericPassword);
         //Assert
@@ -58,6 +61,7 @@ public class LoginTests
     public async Task Login_WithLockedUser_ShowsLockedErrorMessageAsync()
     {
         //Arrange
+        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
         //Act
         await loginPage.LoginAsync("locked_out_user", _genericPassword);
         //Assert
@@ -72,6 +76,8 @@ public class LoginTests
     public async Task Logout_FromHomePage_RedirectToLogin()
     {
         //Arrange
+        _genericPassword = Environment.GetEnvironmentVariable("PASSWORD");
+        _standardUser = Environment.GetEnvironmentVariable("USER");
         await loginPage.GotoAsync();
         await loginPage.LoginAsync(_standardUser, _genericPassword);
         InventoryPage inventoryPage = new InventoryPage(_page);
