@@ -6,8 +6,6 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  PASSWORD: $(PASSWORD)
-  USER: $(USER)
 
 schedules:
 - cron: "0 */6 * * 1-5"
