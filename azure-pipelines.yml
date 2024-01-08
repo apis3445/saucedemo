@@ -34,6 +34,8 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
+  env:
+    PASSWORD: $(PASSWORD)
   inputs:
     command: 'test'
     arguments: /p:settings=sauceDemo/.runsettings
