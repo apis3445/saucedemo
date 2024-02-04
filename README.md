@@ -163,3 +163,6 @@ public void UoW_InitialCondition_ExpectedResult()
 
 }]
 ```
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U1U2V3V)
+
