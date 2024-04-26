@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 using System.Threading.Tasks;
 using sauceDemo.Base;
 

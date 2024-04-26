@@ -1,13 +1,9 @@
-﻿using System;
-namespace sauceDemo.Base
+﻿namespace sauceDemo.Base;
+
+public class Annotation
 {
-	public class Annotation
-	{
-        public AnnotationType AnnotationType { get; set; }
+    public AnnotationType AnnotationType { get; set; }
 
-        public string Description { get; set; }
+    public string Description { get; set; }
 
-    }
 }
-
-    

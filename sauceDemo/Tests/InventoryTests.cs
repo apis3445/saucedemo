@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using sauceDemo.Base;
-using sauceDemo.Components;
 using sauceDemo.Pages;
 
 namespace sauceDemo.Tests;

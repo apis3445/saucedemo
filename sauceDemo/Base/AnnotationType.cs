@@ -1,13 +1,11 @@
-﻿using System;
-namespace sauceDemo.Base
+﻿namespace sauceDemo.Base;
+
+public enum AnnotationType
 {
-	public enum AnnotationType
-	{
-		Name,
-		Description,
-		Assert,
-		Step,
-		Precondition
-	}
+	Name,
+	Description,
+	Assert,
+	Step,
+	Precondition
 }
 

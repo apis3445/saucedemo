@@ -1,9 +1,7 @@
-﻿using System;
-namespace sauceDemo.Base
+﻿namespace sauceDemo.Base;
+
+public interface IReporter
 {
-	public interface IReporter
-	{
-		void PrintAnnotation(Annotation annotation);
-	}
+	void PrintAnnotation(Annotation annotation);
 }
 

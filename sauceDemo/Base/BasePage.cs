@@ -9,7 +9,7 @@ using sauceDemo.Base;
 namespace sauceDemo;
 
 /// <summary>
-/// Basse Page with common functions to all pages
+/// Base Page with common functions to all pages
 /// </summary>
 public class BasePage
 {
@@ -38,9 +38,9 @@ public class BasePage
     {
         get
         {
-           if (_shoppingCartBadge.IsVisibleAsync().Result)
+            if (_shoppingCartBadge.IsVisibleAsync().Result)
                 return int.Parse(_shoppingCartBadge.TextContentAsync().Result);
-           else
+            else
                 return 0;
         }
     }
@@ -54,9 +54,9 @@ public class BasePage
     public async Task TakeScreenShootAsync(string name)
     {
         var screenImage = System.IO.Path.Combine(TestContext.CurrentContext.TestDirectory, name + "-" + Guid.NewGuid().ToString() + ".png");
-        var imageBytes = await Page.ScreenshotAsync(new PageScreenshotOptions { FullPage = true});
-        File.WriteAllBytes(screenImage,imageBytes);
-        TestContext.AddTestAttachment(screenImage);  
+        var imageBytes = await Page.ScreenshotAsync(new PageScreenshotOptions { FullPage = true });
+        File.WriteAllBytes(screenImage, imageBytes);
+        TestContext.AddTestAttachment(screenImage);
     }
 
     /// <summary>
@@ -93,7 +93,7 @@ public class BasePage
         Assert.That(expected, Is.EqualTo(actual), errorMessage);
     }
 
-    public List<Annotation> GetAnnotations ()
+    public List<Annotation> GetAnnotations()
     {
         return this.annotationHelper.GetAnnotations();
     }
